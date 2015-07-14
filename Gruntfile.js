@@ -127,7 +127,8 @@ module.exports = function (grunt) {
 
       nudorucomponents: {
         src: [
-          'src/scripts/nudoru/components/*.js'
+          'src/scripts/nudoru/components/*.js',
+          'src/scripts/nudoru/services/**/*.js'
         ],
         dest: 'bin/scripts/nudoru.components.js'
       },

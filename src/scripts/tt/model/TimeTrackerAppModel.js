@@ -13,7 +13,8 @@ define('TT.Model.TimeTrackerAppModel',
         _dataCreator      = require('TT.Model.MockDataCreator'),
         _appEvents        = require('Nori.Events.AppEventCreator'),
         _dispatcher       = require('Nori.Utils.Dispatcher'),
-        _ttEventConstants = require('TT.Events.TTEventConstants');
+        _ttEventConstants = require('TT.Events.TTEventConstants'),
+        _sharePoint       = require('Nudoru.Services.SharePointConnect');
 
     //----------------------------------------------------------------------------
     //  Accessors
