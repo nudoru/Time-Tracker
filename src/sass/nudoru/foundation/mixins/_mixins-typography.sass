@@ -34,9 +34,9 @@
   text-transform: uppercase
   font-weight: 700
 
-=paragraph-base($fontSize: $base-font-size, $lineHeight: $double-base-line-height, $marginBottom: $double-base-line-height)
+=paragraph-base($size: $base-font-size, $lineHeight: $double-base-line-height, $marginBottom: $double-base-line-height)
   font-family: $font-content
-  font-size: $fontSize
+  font-size: $size
   line-height: $lineHeight
   font-weight: 400
   margin-top: 0
@@ -44,13 +44,13 @@
 
 // TO-DO using $base-font-size here isn't working - why?
 %body-text
-  +paragraph-base(.9rem, $double-base-line-height+$half-base-line-height, $double-base-line-height)
+  +paragraph-base($base-font-size, $double-base-line-height+$half-base-line-height, $double-base-line-height)
 
 %body-text-small
-  +paragraph-base(.8rem, $triple-base-line-height, $double-base-line-height)
+  +paragraph-base($ms--1, $triple-base-line-height, $double-base-line-height)
 
 %body-text-big
-  +paragraph-base(1rem, $triple-base-line-height, $double-base-line-height)
+  +paragraph-base($ms-2, $triple-base-line-height, $double-base-line-height)
 
 %small-headers
   h1
