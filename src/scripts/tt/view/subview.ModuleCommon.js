@@ -106,10 +106,10 @@ define('TT.View.ModuleCommon',
         _toolTip.add({
           title   : '',
           content : state.assignments[projectID].projectDescription,
-          position: 'R',
+          position: 'B',
           targetEl: headingCellEl,
           type    : 'information',
-          width   : 350
+          width   : 400
         });
       });
     }
@@ -128,6 +128,9 @@ define('TT.View.ModuleCommon',
      * @param elIDStr
      */
     function flashAssignmentRow(elIDStr) {
+      return;
+
+      // Disabled
       var row, animTimeLine;
 
       elIDStr = parseProjectID(elIDStr);

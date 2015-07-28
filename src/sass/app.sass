@@ -108,3 +108,35 @@ body
   right: 0
   background-color: $color-white-grey-fill
   overflow-y: auto
+
+//------------------------------------------------------------------------------
+//  Custom
+//------------------------------------------------------------------------------
+
+.card__header
+  color: $light-teal !important
+
+.card__header-nav-button
+  @extend %button
+  @extend .button-neutral
+  background-color: $color-nocolor
+  color: $light-teal
+  border: 1px solid $light-teal
+  box-shadow: none
+  text-shadow: none
+  &:hover, &:active
+    color: $dark-teal
+    border: 1px solid $dark-teal
+    background-color: rgba(0,0,0,.05)
+
+.timecard__status-inprogress
+  span
+    color: $dark-green
+    font-style: normal
+    font-weight: 700
+
+.timecard__status-locked
+  span
+    color: $dark-teal
+    font-style: normal
+    font-weight: 700

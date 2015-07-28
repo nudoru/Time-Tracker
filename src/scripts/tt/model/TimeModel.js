@@ -15,7 +15,7 @@ define('TT.Model.TimeModel',
     }
 
     function prettyNow() {
-      return moment().format('MMM Do YYYY, h:m a');
+      return moment().format('MMM Do YYYY, h:mm a');
     }
 
     function getCurrentWeek() {

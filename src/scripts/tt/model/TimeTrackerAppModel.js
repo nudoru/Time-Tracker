@@ -69,7 +69,8 @@ define('TT.Model.TimeTrackerAppModel',
     }
 
     function publishUpdateNotification(message) {
-      _appEvents.notifyUser('Model', message);
+      //_appEvents.notifyUser('Model', message);
+      console.log('Model: ' + message);
     }
 
     //----------------------------------------------------------------------------
@@ -340,7 +341,7 @@ define('TT.Model.TimeTrackerAppModel',
     function isCurrentWeekTimeCardLocked() {
       var currentWeek = _currentUserMap.getKeyProp('timeCardHistory', getTimeModelObj().date);
 
-      if(currentWeek) {
+      if (currentWeek) {
         return currentWeek.submitted;
       }
 
@@ -349,8 +350,8 @@ define('TT.Model.TimeTrackerAppModel',
 
     function getCurrentTimeCardSubmitMetaData() {
       var obj = {};
-      if(isCurrentWeekTimeCardLocked()) {
-        obj = _.merge({},_currentUserMap.getKeyProp('timeCardHistory', getTimeModelObj().date));
+      if (isCurrentWeekTimeCardLocked()) {
+        obj = _.merge({}, _currentUserMap.getKeyProp('timeCardHistory', getTimeModelObj().date));
       }
       return obj;
     }
@@ -382,7 +383,7 @@ define('TT.Model.TimeTrackerAppModel',
         updateAssignmentTimeCardData(assignmentID, dataRow[assignmentID]);
       });
 
-      //publishUpdateNotification('Time card updated successfully.');
+      publishUpdateNotification('Time card updated successfully.');
     }
 
     //----------------------------------------------------------------------------
@@ -402,16 +403,16 @@ define('TT.Model.TimeTrackerAppModel',
     //  API
     //----------------------------------------------------------------------------
 
-    exports.initialize                      = initialize;
-    exports.getCurrentUserModel             = getCurrentUserModel;
-    exports.getTimeModelObj                 = getTimeModelObj;
-    exports.getNow                          = getNow;
-    exports.handleModelDataChanged          = handleModelDataChanged;
-    exports.handleUpdateModelData           = handleUpdateModelData;
-    exports.getProjectsAndIDList            = getProjectsAndIDList;
-    exports.getNonAssignedProjectsAndIDList = getNonAssignedProjectsAndIDList;
-    exports.getAssignmentMapForID           = getAssignmentMapForID;
-    exports.getAssignmentsForCurrentUser    = getAssignmentsForCurrentUser;
-    exports.isCurrentWeekTimeCardLocked     = isCurrentWeekTimeCardLocked;
+    exports.initialize                       = initialize;
+    exports.getCurrentUserModel              = getCurrentUserModel;
+    exports.getTimeModelObj                  = getTimeModelObj;
+    exports.getNow                           = getNow;
+    exports.handleModelDataChanged           = handleModelDataChanged;
+    exports.handleUpdateModelData            = handleUpdateModelData;
+    exports.getProjectsAndIDList             = getProjectsAndIDList;
+    exports.getNonAssignedProjectsAndIDList  = getNonAssignedProjectsAndIDList;
+    exports.getAssignmentMapForID            = getAssignmentMapForID;
+    exports.getAssignmentsForCurrentUser     = getAssignmentsForCurrentUser;
+    exports.isCurrentWeekTimeCardLocked      = isCurrentWeekTimeCardLocked;
     exports.getCurrentTimeCardSubmitMetaData = getCurrentTimeCardSubmitMetaData;
   });

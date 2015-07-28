@@ -27,7 +27,7 @@ $table-cell-padding: 3px
       font-family: $font-header
       font-size: .8rem
       font-weight: 700
-      color: $control-primary-color
+      color: $control-table-header-color
       border-bottom: $control-border
       text-align: left
       i.fa
@@ -36,22 +36,23 @@ $table-cell-padding: 3px
 
   thead
     th
-      border-bottom: 1px solid $control-primary-color
+      border-bottom: 1px solid $control-table-header-color
       vertical-align: bottom
 
   tfoot
     th
       border-bottom: none
-      border-top: 1px solid $control-primary-color
+      border-top: 1px solid $control-table-footer-color
       vertical-align: top
       font-family: $font-content
-      color: $dark-warm-grey
+      color: $control-table-footer-color
 
   tbody
     th
       border: none
       text-align: right
       white-space: normal
+      color: $text-color
     tr
       border-bottom: $control-border
 
@@ -118,7 +119,7 @@ $table-cell-padding: 3px
 
 .header-grey
   th
-    color: $light-warm-grey !important
+    color: $color-base-light !important
 
 tr.row-header-inline
   background-color: $color-nocolor !important
