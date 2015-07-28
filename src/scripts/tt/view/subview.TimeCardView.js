@@ -69,7 +69,6 @@ define('TT.View.TimeCardView',
       populateFormData();
       updateColumnSums();
 
-
       if (TT.model().isCurrentWeekTimeCardLocked()) {
         lockCard();
         updateCardStatusText(TT.model().getCurrentTimeCardSubmitMetaData().time);
@@ -191,8 +190,8 @@ define('TT.View.TimeCardView',
           return id.indexOf(col) > 0;
         });
         _columnObj[col].sumEl    = document.getElementById('tc_sum_' + col);
-        // The first column is the allocation column
-        _columnObj[col].type = i === 0 ? '%' : 'hrs';
+        _columnObj[col].type = 'hrs';
+        _columnObj[col].index = i;
       });
 
     }
@@ -230,13 +229,14 @@ define('TT.View.TimeCardView',
 
       for (var col in _columnObj) {
         var sum = sumFieldGroup(_columnObj[col].fieldIDs), isWarn = false;
-        if (_columnObj[col].type === 'hrs') {
-          _cardTotal += sum;
-          if (sum > 9) {
+        // The first column is the allocation column
+        if (_columnObj[col].index === 0) {
+          if (sum > 40) {
             isWarn = true;
           }
-        } else if (_columnObj[col].type === '%') {
-          if (sum > 100) {
+        } else {
+          _cardTotal += sum;
+          if (sum > 9) {
             isWarn = true;
           }
         }

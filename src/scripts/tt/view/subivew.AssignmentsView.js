@@ -213,8 +213,7 @@ define('TT.View.AssignmentsView',
           return id.indexOf(col) > 0;
         });
         _columnObj[col].sumEl    = document.getElementById('asn_sum_' + col);
-        // The first column is the allocation column
-        _columnObj[col].type = i === 0 ? '%' : 'hrs';
+        _columnObj[col].type = 'hrs';
       });
 
     }
@@ -252,10 +251,8 @@ define('TT.View.AssignmentsView',
 
       for (var col in _columnObj) {
         var sum = sumFieldGroup(_columnObj[col].fieldIDs), isWarn = false;
-        if (_columnObj[col].type === '%') {
-          if (sum > 100) {
-            isWarn = true;
-          }
+        if (sum > 40) {
+          isWarn = true;
         }
         _columnObj[col].sumEl.innerHTML = sum + ' ' + _columnObj[col].type;
 

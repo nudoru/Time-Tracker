@@ -7,14 +7,14 @@ define('Nudoru.Component.MessageBoxCreator',
       return _messageBoxView.add({
         title: title,
         content: '<p>'+message+'</p>',
-        type: _messageBoxView.type().DEFAULT,
+        type: _messageBoxView.type().DANGER,
         modal: modal,
         width: 400,
         buttons: [
           {
             label: 'Close',
             id: 'Close',
-            type: 'default',
+            type: '',
             icon: 'times'
           }
       ]
