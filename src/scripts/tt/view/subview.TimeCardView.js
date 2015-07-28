@@ -2,26 +2,28 @@ define('TT.View.TimeCardView',
   function (require, module, exports) {
 
     var _self,
-        _prefix          = 'tc_p_',
-        _columnNames     = ['alloc', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
-        _columnObj       = Object.create(null),
-        _cardTotal       = 0,
+        _prefix            = 'tc_p_',
+        _columnNames       = ['alloc', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
+        _columnObj         = Object.create(null),
+        _cardTotal         = 0,
         _submitButtonEl,
         _submitButtonLabelEl,
-        _isLocked        = false,
+        _isLocked          = false,
         _lockedStatusEl,
         _inProgressStatusEl,
-        _domUtils        = require('Nudoru.Browser.DOMUtils'),
-        _ttEvents        = require('TT.Events.TTEventCreator'),
-        _arrayUtils      = require('Nudoru.Core.ArrayUtils'),
-        _successMessages = ['Thanks for all you do!',
-          '"What ever you\'re goal is in life, embrace it visualize it, and for it will be yours."',
-          'Success is 1% inspiration, 98% perspiration and 2% attention to detail.',
-          '"Land is always on the mind of a flying bird."',
-          '"Do or do not, there is no try." -Yoda',
-          '"Life is not easy for any of us. But what of that? We must have perseverance and above all confidence in ourselves. We must believe that we are gifted for something and that this thing must be attained." -Marie Curie',
-          '"Perseverance is not a long race; it is many short races one after the other." -Walter Elliot'
-        ];
+        _domUtils          = require('Nudoru.Browser.DOMUtils'),
+        _ttEvents          = require('TT.Events.TTEventCreator'),
+        _arrayUtils        = require('Nudoru.Core.ArrayUtils'),
+        _appEventConstants = require('Nori.Events.AppEventConstants'),
+        _dispatcher        = require('Nori.Utils.Dispatcher');
+    _successMessages       = ['Thanks for all you do!',
+      '"What ever you\'re goal is in life, embrace it visualize it, and for it will be yours."',
+      'Success is 1% inspiration, 98% perspiration and 2% attention to detail.',
+      '"Land is always on the mind of a flying bird."',
+      '"Do or do not, there is no try." -Yoda',
+      '"Life is not easy for any of us. But what of that? We must have perseverance and above all confidence in ourselves. We must believe that we are gifted for something and that this thing must be attained." -Marie Curie',
+      '"Perseverance is not a long race; it is many short races one after the other." -Walter Elliot'
+    ];
 
     //--------------------------------------------------------------------------
     // Core
@@ -78,7 +80,12 @@ define('TT.View.TimeCardView',
       }
 
       if (this.getAssignmentRows().length === 0) {
-        this.showAlert('You don\'t have any active assignments. Click on the <strong>Assignments</strong> button to add them and then return here to enter hours.');
+        this.showAlert('You don\'t have any active assignments. Click on the <strong>Assignments</strong> button to add them and then return here to enter hours.', function () {
+          _dispatcher.publish({
+            type   : _appEventConstants.CHANGE_ROUTE,
+            payload: {route: '/Assignments'}
+          });
+        });
       }
     }
 
@@ -190,8 +197,8 @@ define('TT.View.TimeCardView',
           return id.indexOf(col) > 0;
         });
         _columnObj[col].sumEl    = document.getElementById('tc_sum_' + col);
-        _columnObj[col].type = 'hrs';
-        _columnObj[col].index = i;
+        _columnObj[col].type     = 'hrs';
+        _columnObj[col].index    = i;
       });
 
     }

@@ -5,11 +5,11 @@
 define('TT.View.ModuleNavView',
   function (require, module, exports) {
 
-    var _buttonMap = Object.create(null),
-      _browserInfo = require('Nudoru.Browser.BrowserInfo'),
-      _appEventConstants = require('Nori.Events.AppEventConstants'),
-      _domUtils = require('Nudoru.Browser.DOMUtils'),
-      _dispatcher = require('Nori.Utils.Dispatcher');
+    var _buttonMap         = Object.create(null),
+        _browserInfo       = require('Nudoru.Browser.BrowserInfo'),
+        _appEventConstants = require('Nori.Events.AppEventConstants'),
+        _domUtils          = require('Nudoru.Browser.DOMUtils'),
+        _dispatcher        = require('Nori.Utils.Dispatcher');
 
     function initialize() {
       mapButton('btn_assignments', '/Assignments');
@@ -24,12 +24,12 @@ define('TT.View.ModuleNavView',
      */
     function mapButton(elID, route) {
       var buttonEl = document.getElementById(elID),
-        liEl =buttonEl.parentNode;
+          liEl     = buttonEl.parentNode;
 
       _buttonMap[elID] = {
-        buttonEl: buttonEl,
-        liEl: liEl,
-        route: route,
+        buttonEl   : buttonEl,
+        liEl       : liEl,
+        route      : route,
         clickStream: Rx.Observable.fromEvent(buttonEl, _browserInfo.mouseClickEvtStr())
           .subscribe(function () {
             handleButton(elID);
@@ -42,7 +42,10 @@ define('TT.View.ModuleNavView',
      * @param id
      */
     function handleButton(id) {
-      _dispatcher.publish({type:_appEventConstants.CHANGE_ROUTE, payload:{route: _buttonMap[id].route}});
+      _dispatcher.publish({
+        type   : _appEventConstants.CHANGE_ROUTE,
+        payload: {route: _buttonMap[id].route}
+      });
     }
 
     /**
@@ -60,12 +63,12 @@ define('TT.View.ModuleNavView',
       }
 
       // Default since it won't matches one of the specific routes
-      if(route === '/') {
+      if (route === '/') {
         _domUtils.addClass(_buttonMap.btn_timecard.liEl, 'active');
       }
     }
 
-    exports.initialize = initialize;
+    exports.initialize      = initialize;
     exports.highlightModule = highlightModule;
 
   });

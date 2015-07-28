@@ -198,8 +198,8 @@ define('TT.View.ModuleCommon',
     //  Utility
     //----------------------------------------------------------------------------
 
-    function showAlert(message) {
-      _messageBoxIDs.push(TT.view().mbCreator().alert('Alert', message));
+    function showAlert(message, cb) {
+      _messageBoxIDs.push(TT.view().mbCreator().alert('Alert', message, false, cb));
     }
 
     function closeAllAlerts() {
