@@ -1,7 +1,7 @@
 define('TT.View.AssignmentsView',
   function (require, module, exports) {
 
-    var _self,
+    var _this,
         _prefix        = 'asn_p_',
         _columnNames = ['alloc'],
         _columnObj   = Object.create(null),
@@ -12,14 +12,14 @@ define('TT.View.AssignmentsView',
         _ttEvents      = require('TT.Events.TTEventCreator');
 
     function initialize(initObj) {
-      _self = this;
+      _this = this;
       if (!this.isInitialized()) {
         this.initializeSubView(initObj);
         this.setEvents({
           'change #asn_p_table'  : handleInputChangeEvent,
           'click #asn_btn-addnew': handleAddNewClick
         });
-        TT.registerViewForModelChanges('assignmentsCollection', this.getID());
+        TT.bindToMap('assignmentsCollection', this.getID());
       }
     }
 
@@ -82,7 +82,7 @@ define('TT.View.AssignmentsView',
     //--------------------------------------------------------------------------
 
     function populateFormData() {
-      var assignments = _self.getState().assignments,
+      var assignments = _this.getState().assignments,
         assignmentIDs = Object.keys(assignments);
 
       assignmentIDs.forEach(function(aid) {
@@ -99,10 +99,10 @@ define('TT.View.AssignmentsView',
      * @param evt
      */
     function handleInputChangeEvent(evt) {
-      _self.flashAssignmentRow(evt.target.getAttribute('id'));
+      _this.flashAssignmentRow(evt.target.getAttribute('id'));
       updateColumnSums();
 
-      _ttEvents.updateAssignments(_self.getAssignmentRowData(_prefix));
+      _ttEvents.updateAssignments(_this.getAssignmentRowData(_prefix));
     }
 
     /**
@@ -138,7 +138,7 @@ define('TT.View.AssignmentsView',
      * Build a list of all start and end date input fields
      */
     function getDateFieldsList() {
-      return _domUtils.getQSElementsAsArray(_self.getDOMElement(), 'input').filter(function (inputEl) {
+      return _domUtils.getQSElementsAsArray(_this.getDOMElement(), 'input').filter(function (inputEl) {
         var id = inputEl.getAttribute('id');
         if (!id) {
           return false;
@@ -151,7 +151,7 @@ define('TT.View.AssignmentsView',
      * Configure the remove buttons
      */
     function assignRemoveButtonEvents() {
-      var buttons    = _domUtils.getQSElementsAsArray(_self.getDOMElement(), 'button').filter(function (inputEl) {
+      var buttons    = _domUtils.getQSElementsAsArray(_this.getDOMElement(), 'button').filter(function (inputEl) {
             var id = inputEl.getAttribute('id');
             if (!id) {
               return false;
@@ -202,7 +202,7 @@ define('TT.View.AssignmentsView',
      * Build an array of all of the form fields on the screen
      */
     function buildColumnFieldsObject() {
-      var allInputEls = _self.getDOMElement().querySelectorAll('input');
+      var allInputEls = _this.getDOMElement().querySelectorAll('input');
       var allInputIDs = Array.prototype.slice.call(allInputEls, 0).map(function (el) {
         return el.getAttribute('id');
       });

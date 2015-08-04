@@ -111,7 +111,7 @@ var Nori = (function () {
    * @param modelID
    * @param viewID
    */
-  function registerViewForModelChanges(modelID, viewID) {
+  function bindToMap(modelID, viewID) {
     var viewArry = _modelViewBindingMap[modelID];
 
     if (viewArry) {
@@ -339,7 +339,7 @@ var Nori = (function () {
     mapEventCommand: mapEventCommand,
     extend: extend,
     extendWithArray: extendWithArray,
-    registerViewForModelChanges: registerViewForModelChanges,
+    bindToMap: bindToMap,
     handleModelUpdate: handleModelUpdate
   };
 

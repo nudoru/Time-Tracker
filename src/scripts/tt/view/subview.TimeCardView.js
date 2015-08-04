@@ -1,7 +1,7 @@
 define('TT.View.TimeCardView',
   function (require, module, exports) {
 
-    var _self,
+    var _this,
         _prefix            = 'tc_p_',
         _columnNames       = ['alloc', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
         _columnObj         = Object.create(null),
@@ -34,7 +34,7 @@ define('TT.View.TimeCardView',
      * @param initObj
      */
     function initialize(initObj) {
-      _self = this;
+      _this = this;
       if (!this.isInitialized()) {
         this.initializeSubView(initObj);
         this.setEvents({
@@ -44,7 +44,7 @@ define('TT.View.TimeCardView',
           'click #tc_btn-prevwk': handlePreviousWeekClick,
           'click #tc_btn-nextwk': handleNextWeekClick
         });
-        TT.registerViewForModelChanges('timeModel', this.getID());
+        TT.bindToMap('timeModel', this.getID());
       }
     }
 
@@ -122,10 +122,10 @@ define('TT.View.TimeCardView',
      * @param evt
      */
     function handleInputChangeEvent(evt) {
-      _self.flashAssignmentRow(evt.target.getAttribute('id'));
+      _this.flashAssignmentRow(evt.target.getAttribute('id'));
       updateColumnSums();
 
-      _ttEvents.updateTimeCard(_self.getAssignmentRowData(_prefix));
+      _ttEvents.updateTimeCard(_this.getAssignmentRowData(_prefix));
     }
 
     /**
@@ -133,12 +133,12 @@ define('TT.View.TimeCardView',
      */
     function handleTimeCardSubmitClick() {
       if (_isLocked) {
-        _self.showAlert('Unlock the time card to make edits and submit changes.');
+        _this.showAlert('Unlock the time card to make edits and submit changes.');
         return;
       }
 
       if (_cardTotal < 30) {
-        _self.showAlert('Whoa there! ' + _cardTotal + ' hours doesn\'t seem quite right. Please enter atleast 30 hours to submit.');
+        _this.showAlert('Whoa there! ' + _cardTotal + ' hours doesn\'t seem quite right. Please enter atleast 30 hours to submit.');
         return;
       }
 
@@ -153,12 +153,12 @@ define('TT.View.TimeCardView',
     }
 
     function populateFormData() {
-      var assignments   = _self.getState().assignments,
+      var assignments   = _this.getState().assignments,
           assignmentIDs = Object.keys(assignments);
 
       assignmentIDs.forEach(function (aid) {
         var assignment = assignments[aid],
-            weekData   = assignment.weekData[_self.getState().calendar.date];
+            weekData   = assignment.weekData[_this.getState().calendar.date];
 
         if (weekData) {
           console.log(aid, weekData);
@@ -186,7 +186,7 @@ define('TT.View.TimeCardView',
      * Build an array of all of the form fields on the screen
      */
     function buildColumnFieldsObject() {
-      var allInputEls = _self.getDOMElement().querySelectorAll('input');
+      var allInputEls = _this.getDOMElement().querySelectorAll('input');
       var allInputIDs = Array.prototype.slice.call(allInputEls, 0).map(function (el) {
         return el.getAttribute('id');
       });
@@ -314,7 +314,7 @@ define('TT.View.TimeCardView',
 
     function lockCard() {
       _isLocked = true;
-      _self.disableForm();
+      _this.disableForm();
       _domUtils.addClass(_submitButtonEl, 'button-disabled');
       _domUtils.addClass(_inProgressStatusEl, 'hidden');
       _domUtils.removeClass(_lockedStatusEl, 'hidden');
@@ -322,7 +322,7 @@ define('TT.View.TimeCardView',
 
     function unlockCard() {
       _isLocked = false;
-      _self.enableForm();
+      _this.enableForm();
       _domUtils.removeClass(_submitButtonEl, 'button-disabled');
       _domUtils.removeClass(_inProgressStatusEl, 'hidden');
       _domUtils.addClass(_lockedStatusEl, 'hidden');

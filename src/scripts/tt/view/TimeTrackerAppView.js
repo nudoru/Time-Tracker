@@ -7,7 +7,7 @@
 define('TT.View.TimeTrackerAppView',
   function (require, module, exports) {
 
-    var _self,
+    var _this,
         _helpView              = require('Nudoru.Component.CoachMarksView'),
         _moduleNavView         = require('TT.View.ModuleNavView'),
         _appEvents             = require('Nori.Events.AppEventCreator'),
@@ -16,9 +16,9 @@ define('TT.View.TimeTrackerAppView',
         _browserEventConstants = require('Nudoru.Browser.BrowserEventConstants');
 
     function initialize() {
-      _self = this;
-      _self.initializeApplicationView();
-      _self.setRouteViewMountPoint('#contents');
+      _this = this;
+      _this.initializeApplicationView();
+      _this.setRouteViewMountPoint('#contents');
 
       mapRoutes();
       mapComponentViews();
@@ -46,40 +46,40 @@ define('TT.View.TimeTrackerAppView',
       TT.mapRouteView('/Forecast', 'Forecast', 'TT.View.CapacityForecastView');
 
       // Decorate the base subview modules with additional common functionality
-      _self.extendSubViewController('Assignments', [requireNew('TT.View.ModuleCommon')]);
-      _self.extendSubViewController('Timecard', [requireNew('TT.View.ModuleCommon')]);
-      _self.extendSubViewController('Forecast', [requireNew('TT.View.ModuleCommon')]);
+      _this.extendSubViewController('Assignments', [requireNew('TT.View.ModuleCommon')]);
+      _this.extendSubViewController('Timecard', [requireNew('TT.View.ModuleCommon')]);
+      _this.extendSubViewController('Forecast', [requireNew('TT.View.ModuleCommon')]);
     }
 
     function render() {
-      _self.showView('UserProfilePanel');
+      _this.showView('UserProfilePanel');
     }
 
     function mapComponentViews() {
-      _self.mapView('UserProfilePanel', 'TT.View.UserProfilePanelView', false, '#userprofilepanel');
+      _this.mapView('UserProfilePanel', 'TT.View.UserProfilePanelView', false, '#userprofilepanel');
     }
 
     function configureUIEvents() {
-      _self.setEvents({
+      _this.setEvents({
         'click #btn_main_projects': handleProjectsButton,
         'click #btn_main_people'  : handlePeopleButton,
         'click #btn_main_help'    : handleHelpButton
       });
-      _self.delegateEvents();
+      _this.delegateEvents();
     }
 
     function configureApplicationViewEvents() {
       _dispatcher.subscribe(_appEventConstants.NOTIFY_USER, function (payload) {
-        _self.notify(payload.payload.message, payload.payload.title, payload.payload.type);
+        _this.notify(payload.payload.message, payload.payload.title, payload.payload.type);
       });
 
       _dispatcher.subscribe(_appEventConstants.ALERT_USER, function (payload) {
-        _self.alert(payload.payload.message, payload.payload.title);
+        _this.alert(payload.payload.message, payload.payload.title);
       });
     }
 
     function handleProjectsButton() {
-      _self.addMessageBox({
+      _this.addMessageBox({
         title  : 'Projects',
         content: 'This feature is still in development!',
         type   : 'default',
@@ -89,7 +89,7 @@ define('TT.View.TimeTrackerAppView',
     }
 
     function handlePeopleButton() {
-      _self.addMessageBox({
+      _this.addMessageBox({
         title  : 'People',
         content: 'This feature is still in development!',
         type   : 'default',

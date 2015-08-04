@@ -131,29 +131,29 @@ define('TT.View.ModuleCommon',
       return;
 
       // Disabled
-      var row, animTimeLine;
-
-      elIDStr = parseProjectID(elIDStr);
-
-      row = this.getAssignmentRows().filter(function (rowEl) {
-        if (rowEl.getAttribute('id').indexOf(elIDStr) > 0) {
-          return true;
-        }
-        return false;
-      });
-
-      if (row) {
-        animTimeLine = new TimelineLite();
-        animTimeLine.to(row, 0.25, {
-          boxShadow: "0 0 2px 2px rgba(0,94,184,0.25) inset",
-          ease     : Circ.easeOut
-        });
-        animTimeLine.to(row, 0.5, {
-          boxShadow: "0 0 0px 0px rgba(0,94,184,0) inset",
-          ease     : Circ.easeOut
-        });
-        animTimeLine.play();
-      }
+      //var row, animTimeLine;
+      //
+      //elIDStr = parseProjectID(elIDStr);
+      //
+      //row = this.getAssignmentRows().filter(function (rowEl) {
+      //  if (rowEl.getAttribute('id').indexOf(elIDStr) > 0) {
+      //    return true;
+      //  }
+      //  return false;
+      //});
+      //
+      //if (row) {
+      //  animTimeLine = new TimelineLite();
+      //  animTimeLine.to(row, 0.25, {
+      //    boxShadow: "0 0 2px 2px rgba(0,94,184,0.25) inset",
+      //    ease     : Circ.easeOut
+      //  });
+      //  animTimeLine.to(row, 0.5, {
+      //    boxShadow: "0 0 0px 0px rgba(0,94,184,0) inset",
+      //    ease     : Circ.easeOut
+      //  });
+      //  animTimeLine.play();
+      //}
     }
 
     /**

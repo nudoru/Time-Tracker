@@ -1,7 +1,7 @@
 define('TT.Model.TimeTrackerAppModel',
   function (require, module, exports) {
 
-    var _self,
+    var _this,
         _peopleSourceData,
         _projectsSourceData,
         _assignmentsSourceData,
@@ -46,7 +46,7 @@ define('TT.Model.TimeTrackerAppModel',
     //----------------------------------------------------------------------------
 
     function initialize() {
-      _self = this;
+      _this = this;
       this.initializeApplicationModel();
       this.subscribeToModelEvents();
 
@@ -144,9 +144,9 @@ define('TT.Model.TimeTrackerAppModel',
       _projectsSourceData    = JSON.parse(getLocalStorageObject('mockTTData.projects'));
       _assignmentsSourceData = JSON.parse(getLocalStorageObject('mockTTData.assignments'));
 
-      _peopleCollection      = _self.createMapCollection({id: 'peopleCollection'});
-      _projectsCollection    = _self.createMapCollection({id: 'projectsCollection'});
-      _assignmentsCollection = _self.createMapCollection({id: 'assignmentsCollection'});
+      _peopleCollection      = _this.createMapCollection({id: 'peopleCollection'});
+      _projectsCollection    = _this.createMapCollection({id: 'projectsCollection'});
+      _assignmentsCollection = _this.createMapCollection({id: 'assignmentsCollection'});
 
       _peopleCollection.addFromObjArray(_peopleSourceData, 'id', false);
       _projectsCollection.addFromObjArray(_projectsSourceData, 'id', false);
