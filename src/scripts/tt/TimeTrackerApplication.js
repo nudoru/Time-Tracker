@@ -35,9 +35,10 @@ define('TT.TimeTrackerApplication',
     //----------------------------------------------------------------------------
 
     function configureTTEvents() {
-      _dispatcher.subscribe(_appEventConstants.ROUTE_CHANGED, function (payload) {
-        _this.view().updateOnRouteChange(payload.payload);
-      });
+      _dispatcher.subscribe(_appEventConstants.ROUTE_CHANGED,
+        function onRouteChange(payload) {
+          this.view().updateOnRouteChange(payload.payload);
+        }, _this);
     }
 
     //----------------------------------------------------------------------------

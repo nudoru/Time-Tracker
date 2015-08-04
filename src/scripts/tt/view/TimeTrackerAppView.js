@@ -12,8 +12,7 @@ define('TT.View.TimeTrackerAppView',
         _moduleNavView         = require('TT.View.ModuleNavView'),
         _appEvents             = require('Nori.Events.AppEventCreator'),
         _dispatcher            = require('Nori.Utils.Dispatcher'),
-        _appEventConstants     = require('Nori.Events.AppEventConstants'),
-        _browserEventConstants = require('Nudoru.Browser.BrowserEventConstants');
+        _appEventConstants     = require('Nori.Events.AppEventConstants');
 
     function initialize() {
       _this = this;
@@ -52,11 +51,11 @@ define('TT.View.TimeTrackerAppView',
     }
 
     function render() {
-      _this.showView('UserProfilePanel');
+      _this.renderComponent('UserProfilePanel');
     }
 
     function mapComponentViews() {
-      _this.mapView('UserProfilePanel', 'TT.View.UserProfilePanelView', false, '#userprofilepanel');
+      _this.createComponent('UserProfilePanel', 'TT.View.UserProfilePanelView', '#userprofilepanel');
     }
 
     function configureUIEvents() {
