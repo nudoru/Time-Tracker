@@ -1,5 +1,6 @@
 /**
- * A template for a subviews
+ * Base module for app subviews for components
+ * Must be extended with custom modules
  */
 
 define('Nori.View.ApplicationSubView',
@@ -30,6 +31,14 @@ define('Nori.View.ApplicationSubView',
       }
       this.update();
       _isInitialized = true;
+    }
+
+    /**
+     * Bind updates to the map ID to this view's update
+     * @param mapID
+     */
+    function bindMap(mapID) {
+      Nori.bindToMap(mapID, this.getID());
     }
 
     /**
@@ -263,6 +272,8 @@ define('Nori.View.ApplicationSubView',
     exports.setHTML       = setHTML;
     exports.getDOMElement = getDOMElement;
     exports.setDOMElement = setDOMElement;
+
+    exports.bindMap       = bindMap;
 
     exports.viewWillUpdate = viewWillUpdate;
     exports.update         = update;

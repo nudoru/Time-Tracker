@@ -5,12 +5,12 @@
 define('Nori.View.ViewMixinSubViewRoutes',
   function (require, module, exports) {
 
-    var _template = require('Nori.Utils.Templating'),
-      _routeViewMountPoint,
-      _subViewMapping = Object.create(null),
-      _currentRouteViewID,
-      _subViewHTMLTemplatePrefix = 'template__',
-      _appEvents = require('Nori.Events.AppEventCreator');
+    var _template                  = require('Nori.Utils.Templating'),
+        _routeViewMountPoint,
+        _subViewMapping            = Object.create(null),
+        _currentRouteViewID,
+        _subViewHTMLTemplatePrefix = 'template__',
+        _appEvents                 = require('Nori.Events.AppEventCreator');
 
     /**
      * Set the location for the view to append, any contents will be removed prior
@@ -38,9 +38,9 @@ define('Nori.View.ViewMixinSubViewRoutes',
     function mapView(templateID, controllerModID, isRoute, mountPoint) {
       _subViewMapping[templateID] = {
         htmlTemplate: _template.getTemplate(_subViewHTMLTemplatePrefix + templateID),
-        controller: createSubView(requireNew(controllerModID)),
-        isRouteView: isRoute,
-        mountPoint: mountPoint
+        controller  : createSubView(requireNew(controllerModID)),
+        isRouteView : isRoute,
+        mountPoint  : mountPoint
       };
     }
 
@@ -83,20 +83,6 @@ define('Nori.View.ViewMixinSubViewRoutes',
     }
 
     /**
-     * Unused
-     * @param obj
-     */
-    //function bindAllFunctions(obj) {
-    //  for (var func in obj) {
-    //    if (obj.hasOwnProperty(func)) {
-    //      if (_.isFunction(func)) {
-    //        _.bindAll(obj, func);
-    //      }
-    //    }
-    //  }
-    //}
-
-    /**
      * Update subview based on a change in bound model data
      * @param viewID
      */
@@ -121,8 +107,8 @@ define('Nori.View.ViewMixinSubViewRoutes',
       }
 
       subview.controller.initialize({
-        id: templateID,
-        template: subview.htmlTemplate,
+        id        : templateID,
+        template  : subview.htmlTemplate,
         mountPoint: subview.mountPoint
       });
 
@@ -154,23 +140,41 @@ define('Nori.View.ViewMixinSubViewRoutes',
       if (_currentRouteViewID) {
         _subViewMapping[_currentRouteViewID].controller.unmount();
       }
-
       _currentRouteViewID = '';
-
       //document.querySelector(_routeViewMountPoint).innerHTML = '';
+    }
+
+    /**
+     * Sugar for the mapView
+     * @param templateID
+     * @param controllerModID
+     * @param mountPoint
+     */
+    function createComponent(templateID, controllerModID, mountPoint) {
+      mapView(templateID, controllerModID, false, mountPoint);
+    }
+
+    /**
+     * Sugar for showView
+     * @param templateID
+     */
+    function renderComponent(templateID) {
+      showView(templateID);
     }
 
     //----------------------------------------------------------------------------
     //  API
     //----------------------------------------------------------------------------
 
-    exports.setRouteViewMountPoint = setRouteViewMountPoint;
-    exports.template = getTemplate;
-    exports.createSubView = createSubView;
-    exports.mapView = mapView;
-    exports.showView = showView;
-    exports.mapRouteView = mapRouteView;
-    exports.showRouteView = showRouteView;
-    exports.updateView = updateView;
+    exports.setRouteViewMountPoint  = setRouteViewMountPoint;
+    exports.template                = getTemplate;
+    exports.createSubView           = createSubView;
+    exports.createComponent         = createComponent;
+    exports.renderComponent         = renderComponent;
+    exports.mapView                 = mapView;
+    exports.showView                = showView;
+    exports.mapRouteView            = mapRouteView;
+    exports.showRouteView           = showRouteView;
+    exports.updateView              = updateView;
     exports.extendSubViewController = extendSubViewController;
   });

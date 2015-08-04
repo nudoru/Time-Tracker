@@ -6,7 +6,7 @@
 define('Nori.Model.MapCollection',
   function (require, module, exports) {
 
-    var _self,
+    var _this,
         _id,
         _children  = [],
         _silent    = false,
@@ -21,13 +21,13 @@ define('Nori.Model.MapCollection',
         throw new Error('ModelCollection must be init\'d with an id');
       }
 
-      _self   = this;
+      _this   = this;
       _id     = initObj.id;
       _silent = initObj.silent || false;
 
       // TODO test
       if(initObj.models) {
-        addMapsFromArray.call(_self, initObj.models);
+        addMapsFromArray.call(_this, initObj.models);
       }
     }
 
@@ -69,7 +69,7 @@ define('Nori.Model.MapCollection',
     function add(store) {
       var currIdx = getMapIndex(store.getID());
 
-      store.setParentCollection(_self);
+      store.setParentCollection(_this);
 
       if (currIdx >= 0) {
         _children[currIdx] = store;
@@ -80,6 +80,10 @@ define('Nori.Model.MapCollection',
       dispatchChange(_id, 'add_map');
     }
 
+    /**
+     * Remove a store from the collection
+     * @param storeID
+     */
     function remove(storeID) {
       var currIdx = getMapIndex(storeID);
       if (currIdx >= 0) {
@@ -90,6 +94,18 @@ define('Nori.Model.MapCollection',
       } else {
         console.log(_id + ' remove, model not in collection: ' + storeID);
       }
+    }
+
+    /**
+     * Remove all stores from the array
+     */
+    function removeAll() {
+      _children.forEach(function(map) {
+        map.setParentCollection(null);
+      });
+
+      _children = [];
+      dispatchChange(_id, 'remove_map');
     }
 
     /**
@@ -132,14 +148,10 @@ define('Nori.Model.MapCollection',
       //if(_parentCollection) {
       //  _parentCollection.dispatchChange({id:_id, store:getMap()});
       //}
-
     }
 
     function hasMap(storeID) {
-      if (_children[storeID]) {
-        return true;
-      }
-      return false;
+      return _children[storeID];
     }
 
     /**
@@ -233,6 +245,7 @@ define('Nori.Model.MapCollection',
     exports.addMapsFromArray    = addMapsFromArray;
     exports.addFromObjArray     = addFromObjArray;
     exports.remove              = remove;
+    exports.removeAll           = removeAll;
     exports.getMap              = getMap;
     exports.hasMap              = hasMap;
     exports.size                = size;

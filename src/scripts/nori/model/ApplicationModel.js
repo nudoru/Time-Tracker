@@ -1,26 +1,26 @@
 define('Nori.Model.ApplicationModel',
   function (require, module, exports) {
 
-    var _self,
+    var _this,
       _appMapCollectionList = Object.create(null),
       _appMapList = Object.create(null),
       _appEventConstants = require('Nori.Events.AppEventConstants'),
       _dispatcher = require('Nori.Utils.Dispatcher');
 
     function initializeApplicationModel() {
-      _self = this;
+      _this = this;
     }
 
     function subscribeToModelEvents() {
-      if (!_self) {
+      if (!_this) {
         throw new Error('Nori.Model.ApplicationModel, cannot subscribeToModelEvents() without initializeApplicationModel() first');
       }
 
       _dispatcher.subscribe(_appEventConstants.MODEL_DATA_CHANGED, function execute(payload) {
-        _self.handleModelDataChanged(payload);
+        _this.handleModelDataChanged(payload);
       });
       _dispatcher.subscribe(_appEventConstants.UPDATE_MODEL_DATA, function execute(payload) {
-        _self.handleUpdateModelData(payload);
+        _this.handleUpdateModelData(payload);
       });
     }
 
@@ -84,32 +84,6 @@ define('Nori.Model.ApplicationModel',
       return _appMapCollectionList[storeID];
     }
 
-    /**
-     * Itterate over the keys in the specified model and build an object of the
-     * matching key/value pairs
-     * @param sID
-     * @param keysArry
-     * @returns {Object}
-     */
-    //function getKeysFromMap(store, keysArry) {
-    //  var keysMap = Object.create();
-    //
-    //  // if the arg is a string, then it must be an ID
-    //  if (typeof store === 'string') {
-    //    store = getMap(sID);
-    //  }
-    //
-    //  keysArry.forEach(function getKey(key) {
-    //    if (store.has(key)) {
-    //      keysMap[key] = store.get(key);
-    //    } else {
-    //      keysMap[key] = 'ERR:' + key;
-    //    }
-    //  });
-    //
-    //  return keysMap;
-    //}
-
     exports.initializeApplicationModel = initializeApplicationModel;
     exports.subscribeToModelEvents = subscribeToModelEvents;
     exports.handleModelDataChanged = handleModelDataChanged;
@@ -118,6 +92,4 @@ define('Nori.Model.ApplicationModel',
     exports.createMap = createMap;
     exports.getMap = getMap;
     exports.getMapCollection = getMapCollection;
-    //exports.getKeysFromMap = getKeysFromMap;
-
   });

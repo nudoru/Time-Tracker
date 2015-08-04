@@ -1,15 +1,15 @@
 var Nori = (function () {
   var _config,
-    _model,
-    _view,
-    _dispatcherCommandMap = Object.create(null),
-    _modelViewBindingMap = Object.create(null),
-    _appEvents = require('Nori.Events.AppEventCreator'),
-    _appEventConstants = require('Nori.Events.AppEventConstants'),
-    _browserEvents = require('Nudoru.Browser.BrowserEventConstants'),
-    _objectUtils = require('Nudoru.Core.ObjectUtils'),
-    _dispatcher = require('Nori.Utils.Dispatcher'),
-    _router = require('Nori.Utils.Router');
+      _model,
+      _view,
+      _dispatcherCommandMap = Object.create(null),
+      _modelViewBindingMap  = Object.create(null),
+      _appEvents            = require('Nori.Events.AppEventCreator'),
+      _appEventConstants    = require('Nori.Events.AppEventConstants'),
+      _browserEvents        = require('Nudoru.Browser.BrowserEventConstants'),
+      _objectUtils          = require('Nudoru.Core.ObjectUtils'),
+      _dispatcher           = require('Nori.Utils.Dispatcher'),
+      _router               = require('Nori.Utils.Router');
 
   //----------------------------------------------------------------------------
   //  Accessors
@@ -45,8 +45,7 @@ var Nori = (function () {
 
   /**
    * Init the app and inject the model and view
-   * @param model
-   * @param view
+   * @param initObj view, model
    */
   function initializeApplication(initObj) {
     initializeConfig();
@@ -55,14 +54,12 @@ var Nori = (function () {
     if (initObj.view) {
       _view = initObj.view;
     } else {
-      console.log('Nori, no view. Creating default.');
       _view = createApplicationView({});
     }
 
     if (initObj.model) {
       _model = initObj.model;
     } else {
-      console.log('Nori, no model. Creating default.');
       _model = createApplicationModel({});
     }
 
@@ -76,11 +73,11 @@ var Nori = (function () {
    */
   function initializeConfig() {
     _config = {
-      appConfig: APP_CONFIG_DATA,
-      routes: [],
+      appConfig   : window.APP_CONFIG_DATA || {},
+      routes      : [],
       currentRoute: {
         route: '/',
-        data: undefined
+        data : undefined
       }
     };
   }
@@ -100,7 +97,6 @@ var Nori = (function () {
     });
   }
 
-
   //----------------------------------------------------------------------------
   //  Model binding
   //----------------------------------------------------------------------------
@@ -112,6 +108,10 @@ var Nori = (function () {
    * @param viewID
    */
   function bindToMap(modelID, viewID) {
+    if (!modelID || !viewID) {
+      throw new Error('Nori, bindToMap: Model ID and View ID must be defined.', modelID, viewID);
+    }
+
     var viewArry = _modelViewBindingMap[modelID];
 
     if (viewArry) {
@@ -140,8 +140,6 @@ var Nori = (function () {
    * @param modelID
    */
   function notifyViewsOfModelUpdate(modelID) {
-    //console.log('Model update: ',modelID);
-
     var viewArry = _modelViewBindingMap[modelID];
 
     if (viewArry) {
@@ -209,9 +207,9 @@ var Nori = (function () {
    * @param evt The event string
    * @param cmdModuleName Module name of a command object, req execute(dataObj) function
    */
-  function mapEventCommand(evt, cmdModuleName) {
-    _dispatcherCommandMap[evt] = _dispatcher.subscribeCommand(evt, cmdModuleName);
-  }
+  //function mapEventCommand(evt, cmdModuleName) {
+  //  _dispatcherCommandMap[evt] = _dispatcher.subscribeCommand(evt, cmdModuleName);
+  //}
 
   /**
    * Set the router to execute the command when on the route
@@ -219,14 +217,14 @@ var Nori = (function () {
    * @param templateID
    * @param command
    */
-  function mapRouteCommand(route, templateID, command) {
-    _router.when(route, {
-      templateID: templateID,
-      controller: function executeRouteCommand(dataObj) {
-        command.execute(dataObj);
-      }
-    });
-  }
+  //function mapRouteCommand(route, templateID, command) {
+  //  _router.when(route, {
+  //    templateID: templateID,
+  //    controller: function executeRouteCommand(dataObj) {
+  //      command.execute(dataObj);
+  //    }
+  //  });
+  //}
 
   /**
    * Maps a route to a view controller
@@ -265,14 +263,20 @@ var Nori = (function () {
 
   /**
    * Merges objects
-   * @param dest Destination object
-   * @param src Source
+   * @param base Destination object
+   * @param extra Source
    * @returns {*}
    */
   function extend(base, extra) {
     return _.assign({}, base, extra);
   }
 
+  /**
+   * Merges a collection of objects
+   * @param base
+   * @param extArry
+   * @returns {*}
+   */
   function extendWithArray(base, extArry) {
     while (extArry.length) {
       base = _.assign(base, extArry.shift());
@@ -323,24 +327,24 @@ var Nori = (function () {
   //----------------------------------------------------------------------------
 
   return {
-    initializeApplication: initializeApplication,
-    config: getConfig,
-    dispatcher: getDispatcher,
-    router: getRouter,
-    model: getModel,
-    view: getView,
-    createApplication: createApplication,
-    createApplicationModel: createApplicationModel,
-    createApplicationView: createApplicationView,
-    setCurrentRoute: setCurrentRoute,
-    getCurrentRoute: getCurrentRoute,
-    mapRouteView: mapRouteView,
-    mapRouteCommand: mapRouteCommand,
-    mapEventCommand: mapEventCommand,
-    extend: extend,
-    extendWithArray: extendWithArray,
+    initializeApplication      : initializeApplication,
+    config                     : getConfig,
+    dispatcher                 : getDispatcher,
+    router                     : getRouter,
+    model                      : getModel,
+    view                       : getView,
+    createApplication          : createApplication,
+    createApplicationModel     : createApplicationModel,
+    createApplicationView      : createApplicationView,
+    setCurrentRoute            : setCurrentRoute,
+    getCurrentRoute            : getCurrentRoute,
+    mapRouteView               : mapRouteView,
+    //mapRouteCommand            : mapRouteCommand,
+    //mapEventCommand            : mapEventCommand,
+    extend                     : extend,
+    extendWithArray            : extendWithArray,
     bindToMap: bindToMap,
-    handleModelUpdate: handleModelUpdate
+    handleModelUpdate          : handleModelUpdate
   };
 
 }
