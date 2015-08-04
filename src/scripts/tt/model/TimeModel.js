@@ -18,6 +18,10 @@ define('TT.Model.TimeModel',
       return moment().format('MMM Do YYYY, h:mm a');
     }
 
+    function getTimeStamp() {
+      return moment().format('M-D-YY,h:mm:ss,a');
+    }
+
     function getCurrentWeek() {
       return _moment.week();
     }
@@ -68,6 +72,7 @@ define('TT.Model.TimeModel',
     exports.initialize          = initialize;
     exports.now                 = now;
     exports.prettyNow           = prettyNow;
+    exports.getTimeStamp        = getTimeStamp;
     exports.getPrettyDateString = getPrettyDateString;
     exports.getDateString       = getDateString;
     exports.getCurrentWeek      = getCurrentWeek;

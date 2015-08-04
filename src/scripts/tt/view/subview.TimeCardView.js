@@ -138,10 +138,10 @@ define('TT.View.TimeCardView',
         return;
       }
 
-      if (_cardTotal < 30) {
-        _this.showAlert('Whoa there! ' + _cardTotal + ' hours doesn\'t seem quite right. Please enter atleast 30 hours to submit.');
-        return;
-      }
+      //if (_cardTotal === 0) {
+      //  _this.showAlert('Whoa there! ' + _cardTotal + ' hours doesn\'t seem quite right.'); // Please enter at least 30 hours to submit.
+      //  return;
+      //}
 
       promptForCardSubmit();
     }

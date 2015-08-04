@@ -86,7 +86,7 @@ define('TT.Model.MockDataCreator',
         keySkills     : _arrayUtils.rndElement(_possibleTasks),
         comments      : 'No comments',
         photoURL      : 'img/animals/kowala.jpg',
-        timeCardHistory: {}
+        timeCardHistory: {},
       };
     }
 

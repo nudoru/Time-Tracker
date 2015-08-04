@@ -360,24 +360,26 @@ var Nori = (function () {
   //----------------------------------------------------------------------------
 
   return {
-    initializeApplication      : initializeApplication,
-    config                     : getConfig,
-    dispatcher                 : getDispatcher,
-    router                     : getRouter,
-    model                      : getModel,
-    view                       : getView,
-    createApplication          : createApplication,
-    createApplicationModel     : createApplicationModel,
-    createApplicationView      : createApplicationView,
-    setCurrentRoute            : setCurrentRoute,
-    getCurrentRoute            : getCurrentRoute,
-    mapRouteView               : mapRouteView,
+    initializeApplication : initializeApplication,
+    config                : getConfig,
+    dispatcher            : getDispatcher,
+    router                : getRouter,
+    model                 : getModel,
+    view                  : getView,
+    createApplication     : createApplication,
+    createApplicationModel: createApplicationModel,
+    createApplicationView : createApplicationView,
+    setCurrentRoute       : setCurrentRoute,
+    getCurrentRoute       : getCurrentRoute,
+    mapRouteView          : mapRouteView,
     //mapRouteCommand            : mapRouteCommand,
     //mapEventCommand            : mapEventCommand,
-    extend                     : extend,
-    extendWithArray            : extendWithArray,
-    bindToMap: bindToMap,
-    handleModelUpdate          : handleModelUpdate
+    extend                : extend,
+    extendWithArray       : extendWithArray,
+    bindToMap             : bindToMap,
+    handleModelUpdate     : handleModelUpdate,
+    prop                  : prop,
+    withAttr              : withAttr
   };
 
 }

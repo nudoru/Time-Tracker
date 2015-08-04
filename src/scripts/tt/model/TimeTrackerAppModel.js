@@ -338,14 +338,22 @@ define('TT.Model.TimeTrackerAppModel',
       getAssignmentMapForID(id).setKeyProp('timeCardData', getTimeModelObj().date, data);
     }
 
+    /**
+     * Look at the week's history and test if the last submit entry was a lock or unlock
+     * @returns {boolean}
+     */
     function isCurrentWeekTimeCardLocked() {
-      var currentWeek = _currentUserMap.getKeyProp('timeCardHistory', getTimeModelObj().date);
+      var currentWeek = _currentUserMap.getKeyProp('timeCardHistory', getTimeModelObj().date),
+          lastSubmit  = _.last(currentWeek),
+          isSubmitted = false;
 
-      if (currentWeek) {
-        return currentWeek.submitted;
+      for(var ts in lastSubmit) {
+        if(lastSubmit.hasOwnProperty(ts)) {
+          isSubmitted = lastSubmit[ts].submitted;
+        }
       }
 
-      return false;
+      return isSubmitted;
     }
 
     function getCurrentTimeCardSubmitMetaData() {
@@ -356,27 +364,6 @@ define('TT.Model.TimeTrackerAppModel',
       return obj;
     }
 
-    function submitCurrentTimeCard() {
-      _currentUserMap.setKeyProp('timeCardHistory', getTimeModelObj().date, {
-        submitted: true,
-        time     : getPrettyNow()
-      });
-
-      console.log(JSON.stringify(_currentUserMap.get('timeCardHistory')));
-      publishUpdateNotification('Time card submitted successfully ');
-    }
-
-    function unlockCurrentTimeCard(comments) {
-      _currentUserMap.setKeyProp('timeCardHistory', getTimeModelObj().date, {
-        submitted: false,
-        comments : comments,
-        time     : getPrettyNow()
-      });
-
-      console.log(JSON.stringify(_currentUserMap.get('timeCardHistory')));
-      publishUpdateNotification('Time card unlocked successfully ');
-    }
-
     function updateTimeCardDataFromForm(formObj) {
       formObj.forEach(function (dataRow) {
         var assignmentID = Object.keys(dataRow)[0];
@@ -385,6 +372,50 @@ define('TT.Model.TimeTrackerAppModel',
 
       publishUpdateNotification('Time card updated successfully.');
     }
+
+    function submitCurrentTimeCard() {
+      var submitObj                        = Object.create(null);
+      submitObj[_timeModel.getTimeStamp()] = {
+        submitted: true,
+        comment  : ''
+      };
+
+      pushToTimeCardHistory(submitObj);
+      publishUpdateNotification('Time card submitted successfully ');
+    }
+
+    function unlockCurrentTimeCard(comments) {
+      var submitObj                        = Object.create(null);
+      submitObj[_timeModel.getTimeStamp()] = {
+        submitted: false,
+        comment  : comments
+      };
+
+      pushToTimeCardHistory(submitObj);
+      publishUpdateNotification('Time card unlocked successfully ');
+    }
+
+    /* Sample history data
+     {"2015_32":[{"8-4-15,5:31:11,pm":{"submitted":true,"comment":""}},{"8-4-15,5:31:23,pm":{"submitted":false,"comment":"becasuse"}},{"8-4-15,5:31:51,pm":{"submitted":true,"comment":""}}],"2015_31":[{"8-4-15,5:31:30,pm":{"submitted":true,"comment":""}},{"8-4-15,5:31:43,pm":{"submitted":false,"comment":"fff"}},{"8-4-15,5:31:45,pm":{"submitted":true,"comment":""}}]}
+     */
+
+    /**
+     * Add a new submit/unlock event entry to the week's data
+     * @param obj
+     */
+    function pushToTimeCardHistory(obj) {
+      var currentHistory = _currentUserMap.getKeyProp('timeCardHistory', getTimeModelObj().date);
+
+      if (!currentHistory) {
+        console.log('no history for this date!');
+        currentHistory = [];
+      }
+
+      currentHistory.push(obj);
+      _currentUserMap.setKeyProp('timeCardHistory', getTimeModelObj().date, currentHistory);
+      console.log(JSON.stringify(_currentUserMap.get('timeCardHistory')));
+    }
+
 
     //----------------------------------------------------------------------------
     //  Utility

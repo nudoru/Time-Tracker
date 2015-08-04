@@ -38,9 +38,9 @@ define('TT.View.TimeTrackerAppView',
      * Set up the view to routes
      */
     function mapRoutes() {
-      TT.mapRouteView('/', 'Timecard', 'TT.View.TimeCardView');
-      TT.mapRouteView('/Assignments', 'Assignments', 'TT.View.AssignmentsView');
-      TT.mapRouteView('/Forecast', 'Forecast', 'TT.View.CapacityForecastView');
+      TT.mapRouteView('/', 'Timecard', requireNew('TT.View.TimeCardView'));
+      TT.mapRouteView('/Assignments', 'Assignments', requireNew('TT.View.AssignmentsView'));
+      TT.mapRouteView('/Forecast', 'Forecast', requireNew('TT.View.CapacityForecastView'));
 
       // Decorate the base subview modules with additional common functionality
       ['Assignments','Timecard','Forecast'].forEach(function decorate(moduleID) {
@@ -101,7 +101,7 @@ define('TT.View.TimeTrackerAppView',
     function configureHelpCoachmarks() {
       _helpView.outlineElement('#module_navigation', {
         shape        : 'rect',
-        label        : 'Access different module of the application: Adding and removing projects, entering time weekly and viewing your capacity (coming soon). ',
+        label        : 'Access different modules of the application: Adding and removing projects, entering time weekly and viewing your capacity (coming soon). ',
         labelWidth   : 200,
         labelPosition: 'R'
       });
