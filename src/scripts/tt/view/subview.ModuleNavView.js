@@ -13,8 +13,14 @@ define('TT.View.ModuleNavView',
 
     function initialize() {
       mapButton('btn_assignments', '/Assignments');
-      mapButton('btn_timecard', '/Timecard');
+      mapButton('btn_timecard', '/');
       mapButton('btn_forecast', '/Forecast');
+
+      // Highlight the correct module when a route change occurs
+      _dispatcher.subscribe(_appEventConstants.ROUTE_CHANGED,
+        function onRouteChange(payload) {
+          this.highlightModule(payload.payload.route);
+        }, this);
     }
 
     /**

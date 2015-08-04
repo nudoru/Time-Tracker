@@ -20,7 +20,9 @@ define('TT.View.TimeTrackerAppView',
       _this.setRouteViewMountPoint('#contents');
 
       mapRoutes();
-      mapComponentViews();
+
+      _this.createComponent('UserProfilePanel', 'TT.View.UserProfilePanelView', '#userprofilepanel');
+
       configureUIEvents();
       configureHelpCoachmarks();
 
@@ -36,26 +38,18 @@ define('TT.View.TimeTrackerAppView',
      * Set up the view to routes
      */
     function mapRoutes() {
-      // Default route
-      // TODO fix this duplicate controller view
       TT.mapRouteView('/', 'Timecard', 'TT.View.TimeCardView');
-
       TT.mapRouteView('/Assignments', 'Assignments', 'TT.View.AssignmentsView');
-      TT.mapRouteView('/Timecard', 'Timecard', 'TT.View.TimeCardView');
       TT.mapRouteView('/Forecast', 'Forecast', 'TT.View.CapacityForecastView');
 
       // Decorate the base subview modules with additional common functionality
-      _this.extendSubViewController('Assignments', [requireNew('TT.View.ModuleCommon')]);
-      _this.extendSubViewController('Timecard', [requireNew('TT.View.ModuleCommon')]);
-      _this.extendSubViewController('Forecast', [requireNew('TT.View.ModuleCommon')]);
+      ['Assignments','Timecard','Forecast'].forEach(function decorate(moduleID) {
+        _this.extendSubViewController(moduleID, [requireNew('TT.View.ModuleCommon')]);
+      });
     }
 
     function render() {
       _this.renderComponent('UserProfilePanel');
-    }
-
-    function mapComponentViews() {
-      _this.createComponent('UserProfilePanel', 'TT.View.UserProfilePanelView', '#userprofilepanel');
     }
 
     function configureUIEvents() {
@@ -68,13 +62,13 @@ define('TT.View.TimeTrackerAppView',
     }
 
     function configureApplicationViewEvents() {
-      _dispatcher.subscribe(_appEventConstants.NOTIFY_USER, function (payload) {
-        _this.notify(payload.payload.message, payload.payload.title, payload.payload.type);
-      });
+      _dispatcher.subscribe(_appEventConstants.NOTIFY_USER, function onNotifyUser(payload) {
+        this.notify(payload.payload.message, payload.payload.title, payload.payload.type);
+      }, _this);
 
-      _dispatcher.subscribe(_appEventConstants.ALERT_USER, function (payload) {
-        _this.alert(payload.payload.message, payload.payload.title);
-      });
+      _dispatcher.subscribe(_appEventConstants.ALERT_USER, function onAlertuser(payload) {
+        this.alert(payload.payload.message, payload.payload.title);
+      }, _this);
     }
 
     function handleProjectsButton() {
@@ -129,16 +123,6 @@ define('TT.View.TimeTrackerAppView',
       });
     }
 
-    /**
-     * Update the UI or components when the route/subview has changed
-     * @param newRoute
-     */
-    function updateOnRouteChange(newRoute) {
-      _moduleNavView.highlightModule(newRoute.route);
-    }
-
     exports.initialize          = initialize;
     exports.render              = render;
-    exports.updateOnRouteChange = updateOnRouteChange;
-
   });

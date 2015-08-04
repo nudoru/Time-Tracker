@@ -23,8 +23,6 @@ define('TT.TimeTrackerApplication',
      * When model data has been loaded
      */
     function onModelInitialized() {
-      configureTTEvents();
-
       this.view().removeLoadingMessage();
       this.view().render();
       this.setCurrentRoute(TT.router().getCurrentRoute());
@@ -34,12 +32,6 @@ define('TT.TimeTrackerApplication',
     //  Controller functions
     //----------------------------------------------------------------------------
 
-    function configureTTEvents() {
-      _dispatcher.subscribe(_appEventConstants.ROUTE_CHANGED,
-        function onRouteChange(payload) {
-          this.view().updateOnRouteChange(payload.payload);
-        }, _this);
-    }
 
     //----------------------------------------------------------------------------
     //  API

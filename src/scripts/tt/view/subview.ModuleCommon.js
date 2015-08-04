@@ -12,7 +12,7 @@ define('TT.View.ModuleCommon',
         _toolTip        = require('Nudoru.Component.ToolTipView');
 
     function initializeCommon() {
-      //
+      // nothing
     }
 
     //----------------------------------------------------------------------------
@@ -109,7 +109,7 @@ define('TT.View.ModuleCommon',
           position: 'B',
           targetEl: headingCellEl,
           type    : 'information',
-          width   : 400
+          width   : 500
         });
       });
     }
