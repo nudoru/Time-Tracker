@@ -129,7 +129,7 @@ var Nori = (function () {
       callback.call(cntx, prop in currentTarget ? currentTarget[prop] : currentTarget.getAttribute(prop));
     };
   }
-  
+
   //----------------------------------------------------------------------------
   //  Model binding
   //----------------------------------------------------------------------------
