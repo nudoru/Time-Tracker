@@ -54,8 +54,6 @@ define('TT.Model.TimeTrackerAppModel',
 
       createDataCollections();
 
-      _appEvents.applicationModelInitialized();
-
       _dispatcher.subscribe(_ttEventConstants.ADD_ASSIGNMENT, handleAddAssignment);
       _dispatcher.subscribe(_ttEventConstants.ARCHIVE_ASSIGNMENT, handleArchiveAssignment);
       _dispatcher.subscribe(_ttEventConstants.UPDATE_ASSIGNMENTS, handleUpdateAssignments);
@@ -66,6 +64,8 @@ define('TT.Model.TimeTrackerAppModel',
       _dispatcher.subscribe(_ttEventConstants.TIMECARD_WEEKBACKWARD, handleWeekBackward);
 
       publishUpdateNotification('Mock data created successfully');
+
+      _appEvents.applicationModelInitialized();
     }
 
     function publishUpdateNotification(message) {
