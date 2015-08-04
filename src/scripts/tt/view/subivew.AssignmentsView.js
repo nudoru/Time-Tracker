@@ -19,7 +19,7 @@ define('TT.View.AssignmentsView',
           'change #asn_p_table'  : handleInputChangeEvent,
           'click #asn_btn-addnew': handleAddNewClick
         });
-        TT.bindToMap('assignmentsCollection', this.getID());
+        this.bindMap('assignmentsCollection');
       }
     }
 

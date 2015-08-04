@@ -44,7 +44,7 @@ define('TT.View.TimeCardView',
           'click #tc_btn-prevwk': handlePreviousWeekClick,
           'click #tc_btn-nextwk': handleNextWeekClick
         });
-        TT.bindToMap('timeModel', this.getID());
+        this.bindMap('timeModel');
       }
     }
 
@@ -52,6 +52,7 @@ define('TT.View.TimeCardView',
      * Update from the model
      */
     function viewWillUpdate() {
+      // In subview.ModuleCommon
       this.updateStateFromProjectsModel();
     }
 
