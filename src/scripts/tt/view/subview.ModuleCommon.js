@@ -81,6 +81,7 @@ define('TT.View.ModuleCommon',
     function getAssignmentRowData(prefix) {
       var packet = Object.create(null),
           arry   = [];
+
       this.getAssignmentRows().forEach(function (row) {
         var id  = row.getAttribute('id').split(prefix)[1],
             obj = Object.create(null);
