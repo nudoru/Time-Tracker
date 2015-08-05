@@ -215,17 +215,17 @@ define('TT.View.ModuleCommon',
     //  API
     //----------------------------------------------------------------------------
 
-    exports.initializeCommon             = initializeCommon;
-    exports.updateStateFromProjectsModel = updateStateFromProjectsModel;
-    exports.showAlert                    = showAlert;
-    exports.closeAllAlerts               = closeAllAlerts;
-    exports.buildAssignmentRows          = buildAssignmentRows;
-    exports.getAssignmentRows            = getAssignmentRows;
-    exports.getAssignmentRowData         = getAssignmentRowData;
-    exports.setProjectTitleCellToolTips  = setProjectTitleCellToolTips;
-    exports.removeProjectTitleCellToolTips  = removeProjectTitleCellToolTips;
-    exports.flashAssignmentRow           = flashAssignmentRow;
-    exports.parseProjectID               = parseProjectID;
-    exports.disableForm                  = disableForm;
-    exports.enableForm                   = enableForm;
+    module.exports.initializeCommon             = initializeCommon;
+    module.exports.updateStateFromProjectsModel = updateStateFromProjectsModel;
+    module.exports.showAlert                    = showAlert;
+    module.exports.closeAllAlerts               = closeAllAlerts;
+    module.exports.buildAssignmentRows          = buildAssignmentRows;
+    module.exports.getAssignmentRows            = getAssignmentRows;
+    module.exports.getAssignmentRowData         = getAssignmentRowData;
+    module.exports.setProjectTitleCellToolTips  = setProjectTitleCellToolTips;
+    module.exports.removeProjectTitleCellToolTips  = removeProjectTitleCellToolTips;
+    module.exports.flashAssignmentRow           = flashAssignmentRow;
+    module.exports.parseProjectID               = parseProjectID;
+    module.exports.disableForm                  = disableForm;
+    module.exports.enableForm                   = enableForm;
   });

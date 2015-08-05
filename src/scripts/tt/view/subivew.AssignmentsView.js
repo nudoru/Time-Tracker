@@ -270,9 +270,9 @@ define('TT.View.AssignmentsView',
     // API
     //--------------------------------------------------------------------------
 
-    exports.initialize      = initialize;
-    exports.viewWillUpdate  = viewWillUpdate;
-    exports.viewShouldRender = viewShouldRender;
-    exports.viewDidMount    = viewDidMount;
-    exports.viewWillUnmount = viewWillUnmount;
+    module.exports.initialize      = initialize;
+    module.exports.viewWillUpdate  = viewWillUpdate;
+    module.exports.viewShouldRender = viewShouldRender;
+    module.exports.viewDidMount    = viewDidMount;
+    module.exports.viewWillUnmount = viewWillUnmount;
   });

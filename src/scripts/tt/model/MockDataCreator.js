@@ -143,10 +143,10 @@ define('TT.Model.MockDataCreator',
       return para;
     }
 
-    exports.initialize       = initialize;
-    exports.getPeople        = getPeople;
-    exports.getProjects      = getProjects;
-    exports.getAssignments   = getAssignments;
-    exports.createAssignment = createAssignment;
+    module.exports.initialize       = initialize;
+    module.exports.getPeople        = getPeople;
+    module.exports.getProjects      = getProjects;
+    module.exports.getAssignments   = getAssignments;
+    module.exports.createAssignment = createAssignment;
 
   });

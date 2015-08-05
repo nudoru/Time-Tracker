@@ -37,6 +37,6 @@ define('TT.TimeTrackerApplication',
     //  API
     //----------------------------------------------------------------------------
 
-    exports.initialize = initialize;
+    module.exports.initialize = initialize;
 
   });

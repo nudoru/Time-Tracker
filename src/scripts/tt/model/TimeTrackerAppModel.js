@@ -434,16 +434,16 @@ define('TT.Model.TimeTrackerAppModel',
     //  API
     //----------------------------------------------------------------------------
 
-    exports.initialize                       = initialize;
-    exports.getCurrentUserModel              = getCurrentUserModel;
-    exports.getTimeModelObj                  = getTimeModelObj;
-    exports.getNow                           = getNow;
-    exports.handleModelDataChanged           = handleModelDataChanged;
-    exports.handleUpdateModelData            = handleUpdateModelData;
-    exports.getProjectsAndIDList             = getProjectsAndIDList;
-    exports.getNonAssignedProjectsAndIDList  = getNonAssignedProjectsAndIDList;
-    exports.getAssignmentMapForID            = getAssignmentMapForID;
-    exports.getAssignmentsForCurrentUser     = getAssignmentsForCurrentUser;
-    exports.isCurrentWeekTimeCardLocked      = isCurrentWeekTimeCardLocked;
-    exports.getCurrentTimeCardSubmitMetaData = getCurrentTimeCardSubmitMetaData;
+    module.exports.initialize                       = initialize;
+    module.exports.getCurrentUserModel              = getCurrentUserModel;
+    module.exports.getTimeModelObj                  = getTimeModelObj;
+    module.exports.getNow                           = getNow;
+    module.exports.handleModelDataChanged           = handleModelDataChanged;
+    module.exports.handleUpdateModelData            = handleUpdateModelData;
+    module.exports.getProjectsAndIDList             = getProjectsAndIDList;
+    module.exports.getNonAssignedProjectsAndIDList  = getNonAssignedProjectsAndIDList;
+    module.exports.getAssignmentMapForID            = getAssignmentMapForID;
+    module.exports.getAssignmentsForCurrentUser     = getAssignmentsForCurrentUser;
+    module.exports.isCurrentWeekTimeCardLocked      = isCurrentWeekTimeCardLocked;
+    module.exports.getCurrentTimeCardSubmitMetaData = getCurrentTimeCardSubmitMetaData;
   });

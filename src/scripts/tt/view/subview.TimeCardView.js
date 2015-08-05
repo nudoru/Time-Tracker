@@ -341,8 +341,8 @@ define('TT.View.TimeCardView',
     // API
     //--------------------------------------------------------------------------
 
-    exports.initialize      = initialize;
-    exports.viewWillUpdate  = viewWillUpdate;
-    exports.viewDidMount    = viewDidMount;
-    exports.viewWillUnmount = viewWillUnmount;
+    module.exports.initialize      = initialize;
+    module.exports.viewWillUpdate  = viewWillUpdate;
+    module.exports.viewDidMount    = viewDidMount;
+    module.exports.viewWillUnmount = viewWillUnmount;
   });

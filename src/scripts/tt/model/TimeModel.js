@@ -69,16 +69,16 @@ define('TT.Model.TimeModel',
       });
     }
 
-    exports.initialize          = initialize;
-    exports.now                 = now;
-    exports.prettyNow           = prettyNow;
-    exports.getTimeStamp        = getTimeStamp;
-    exports.getPrettyDateString = getPrettyDateString;
-    exports.getDateString       = getDateString;
-    exports.getCurrentWeek      = getCurrentWeek;
-    exports.getCurrentYear      = getCurrentYear;
-    exports.resetToCurrent      = resetToCurrent;
-    exports.forwardWeek         = forwardWeek;
-    exports.backwardWeek        = backwardWeek;
+    module.exports.initialize          = initialize;
+    module.exports.now                 = now;
+    module.exports.prettyNow           = prettyNow;
+    module.exports.getTimeStamp        = getTimeStamp;
+    module.exports.getPrettyDateString = getPrettyDateString;
+    module.exports.getDateString       = getDateString;
+    module.exports.getCurrentWeek      = getCurrentWeek;
+    module.exports.getCurrentYear      = getCurrentYear;
+    module.exports.resetToCurrent      = resetToCurrent;
+    module.exports.forwardWeek         = forwardWeek;
+    module.exports.backwardWeek        = backwardWeek;
 
   });

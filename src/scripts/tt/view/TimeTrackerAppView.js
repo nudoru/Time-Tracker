@@ -44,7 +44,7 @@ define('TT.View.TimeTrackerAppView',
 
       // Decorate the base subview modules with additional common functionality
       ['Assignments','Timecard','Forecast'].forEach(function decorate(moduleID) {
-        _this.extendSubViewController(moduleID, [requireNew('TT.View.ModuleCommon')]);
+        _this.applyMixin(moduleID, [requireNew('TT.View.ModuleCommon')]);
       });
     }
 
@@ -123,6 +123,6 @@ define('TT.View.TimeTrackerAppView',
       });
     }
 
-    exports.initialize          = initialize;
-    exports.render              = render;
+    module.exports.initialize          = initialize;
+    module.exports.render              = render;
   });

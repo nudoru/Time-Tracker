@@ -11,37 +11,37 @@ define('Nudoru.Services.SharePointConnect',
 
     var _debug = true;
 
-    exports.connect = function (cb) {
+    module.exports.connect = function (cb) {
       if(_debug) console.log('SharePoint > connect');
       cb();
     };
 
-    exports.getCurrentUser = function (cb) {
+    module.exports.getCurrentUser = function (cb) {
       if(_debug) console.log('SharePoint > getcurrentuser');
       cb();
     };
 
-    exports.getListItemsFromView = function (list, view, cb) {
+    module.exports.getListItemsFromView = function (list, view, cb) {
       if(_debug) console.log('SharePoint > getListItemsFromView', list, view);
       cb();
     };
 
-    exports.updateListItem = function (list, dataObj, cb) {
+    module.exports.updateListItem = function (list, dataObj, cb) {
       if(_debug) console.log('SharePoint > updateListItem', list, dataObj, value);
       cb();
     };
 
-    exports.addListField = function (list, dataObj, cb) {
+    module.exports.addListField = function (list, dataObj, cb) {
       if(_debug) console.log('SharePoint > addListField', list, dataObj);
       cb();
     };
 
-    exports.addListItem = function (list, dataObj, cb) {
+    module.exports.addListItem = function (list, dataObj, cb) {
       if(_debug) console.log('SharePoint > addListItem', list, dataObj);
       cb();
     };
 
-    exports.deleteListItem = function (list, dataObj, cb) {
+    module.exports.deleteListItem = function (list, dataObj, cb) {
       if(_debug) console.log('SharePoint > deleteListItem', list, dataObj);
       cb();
     };

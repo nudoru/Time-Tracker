@@ -4,7 +4,7 @@ define('TT.Events.TTEventCreator',
     var _dispatcher            = require('Nori.Utils.Dispatcher'),
         _ttEventConstants     = require('TT.Events.TTEventConstants');
 
-    exports.addAssignment = function(projectID) {
+    module.exports.addAssignment = function(projectID) {
       _dispatcher.publish({
         type: _ttEventConstants.ADD_ASSIGNMENT,
         payload: {
@@ -13,7 +13,7 @@ define('TT.Events.TTEventCreator',
       });
     };
 
-    exports.archiveAssignment = function(assignmentID) {
+    module.exports.archiveAssignment = function(assignmentID) {
       _dispatcher.publish({
         type: _ttEventConstants.ARCHIVE_ASSIGNMENT,
         payload: {
@@ -22,7 +22,7 @@ define('TT.Events.TTEventCreator',
       });
     };
 
-    exports.updateAssignments = function(data) {
+    module.exports.updateAssignments = function(data) {
       _dispatcher.publish({
         type: _ttEventConstants.UPDATE_ASSIGNMENTS,
         payload: {
@@ -31,14 +31,14 @@ define('TT.Events.TTEventCreator',
       });
     };
 
-    exports.submitTimeCard = function() {
+    module.exports.submitTimeCard = function() {
       _dispatcher.publish({
         type: _ttEventConstants.SUBMIT_TIMECARD,
         payload: {}
       });
     };
 
-    exports.unSubmitTimeCard = function(comments) {
+    module.exports.unSubmitTimeCard = function(comments) {
       _dispatcher.publish({
         type: _ttEventConstants.UNLOCK_TIMECARD,
         payload: {
@@ -47,7 +47,7 @@ define('TT.Events.TTEventCreator',
       });
     };
 
-    exports.updateTimeCard = function(data) {
+    module.exports.updateTimeCard = function(data) {
       _dispatcher.publish({
         type: _ttEventConstants.UPDATE_TIMECARD,
         payload: {
@@ -56,14 +56,14 @@ define('TT.Events.TTEventCreator',
       });
     };
 
-    exports.goWeekForward = function() {
+    module.exports.goWeekForward = function() {
       _dispatcher.publish({
         type: _ttEventConstants.TIMECARD_WEEKFORWARD,
         payload: {}
       });
     };
 
-    exports.goWeekBackward = function() {
+    module.exports.goWeekBackward = function() {
       _dispatcher.publish({
         type: _ttEventConstants.TIMECARD_WEEKBACKWARD,
         payload: {}

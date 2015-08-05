@@ -74,7 +74,7 @@ define('TT.View.ModuleNavView',
       }
     }
 
-    exports.initialize      = initialize;
-    exports.highlightModule = highlightModule;
+    module.exports.initialize      = initialize;
+    module.exports.highlightModule = highlightModule;
 
   });

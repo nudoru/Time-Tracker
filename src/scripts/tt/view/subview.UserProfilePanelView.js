@@ -16,6 +16,6 @@ define('TT.View.UserProfilePanelView',
       });
     }
 
-    exports.initialize     = initialize;
-    exports.viewWillUpdate = viewWillUpdate;
+    module.exports.initialize     = initialize;
+    module.exports.viewWillUpdate = viewWillUpdate;
   });
