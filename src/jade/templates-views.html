@@ -59,7 +59,7 @@ BEGIN Templates for Views
             <table id="fc_p_table" class="table table-rows-zebra">
                 <tbody>
                 <% _.forOwn(assignments, function(assignment, key) { %>
-                    <tr id="fc_p_<%= assignment.assignmentID%>">
+                    <tr class="card__project-<%= assignment.projectType %>" id="fc_p_<%= assignment.assignmentID%>">
                         <th class="center-column"><%= assignment.projectTitle %></th>
                     </tr>
                 <% }); %>
@@ -97,7 +97,7 @@ BEGIN Templates for Views
                 </thead>
                 <tbody>
                     <% _.forOwn(assignments, function(assignment, key) { %>
-                        <tr id="asn_p_<%= assignment.assignmentID%>">
+                        <tr class="card__project-<%= assignment.projectType %>" id="asn_p_<%= assignment.assignmentID%>">
                             <th><%= assignment.projectTitle %></th>
                             <td class="center-column">
                                 <input name="startDate" id="asn_p_start_<%= assignment.assignmentID%>" type="text" placeholder="" style="width: 100px" class="subtle">
@@ -188,7 +188,7 @@ BEGIN Templates for Views
                 </thead>
                 <tbody>
                 <% _.forOwn(assignments, function(assignment, key) { %>
-                    <tr id="tc_p_<%= assignment.assignmentID%>">
+                    <tr class="card__project-<%= assignment.projectType %>" id="tc_p_<%= assignment.assignmentID%>">
                         <th><%= assignment.projectTitle %></th>
                         <td class="center-column">
                             <input name="allocation" id="tc_p_alloc_<%= assignment.assignmentID%>" class="input-text" type="text" placeholder="" style="width: 40px" class="subtle">
