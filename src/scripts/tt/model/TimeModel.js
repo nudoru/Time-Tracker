@@ -3,7 +3,7 @@ define('TT.Model.TimeModel',
   function (require, module, exports) {
     var _moment,
         _id,
-        _appEvents = require('Nori.Events.AppEventCreator');
+        _appEvents = require('Nori.Events.NoriEventCreator');
 
     function initialize() {
       _moment = moment();

@@ -10,9 +10,9 @@ define('TT.View.TimeTrackerAppView',
     var _this,
         _helpView              = require('Nudoru.Component.CoachMarksView'),
         _moduleNavView         = require('TT.View.ModuleNavView'),
-        _appEvents             = require('Nori.Events.AppEventCreator'),
+        _appEvents             = require('Nori.Events.NoriEventCreator'),
         _dispatcher            = require('Nori.Utils.Dispatcher'),
-        _appEventConstants     = require('Nori.Events.AppEventConstants');
+        _appEventConstants     = require('Nori.Events.NoriEventConstants');
 
     function initialize() {
       _this = this;

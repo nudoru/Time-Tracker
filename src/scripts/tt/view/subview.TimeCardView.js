@@ -14,7 +14,7 @@ define('TT.View.TimeCardView',
         _domUtils          = require('Nudoru.Browser.DOMUtils'),
         _ttEvents          = require('TT.Events.TTEventCreator'),
         _arrayUtils        = require('Nudoru.Core.ArrayUtils'),
-        _appEventConstants = require('Nori.Events.AppEventConstants'),
+        _appEventConstants = require('Nori.Events.NoriEventConstants'),
         _dispatcher        = require('Nori.Utils.Dispatcher');
     _successMessages       = ['Thanks for all you do!',
       '"What ever you\'re goal is in life, embrace it visualize it, and for it will be yours."',

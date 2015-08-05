@@ -11,7 +11,7 @@ define('TT.Model.TimeTrackerAppModel',
         _currentUserMap,
         _timeModel        = require('TT.Model.TimeModel'),
         _dataCreator      = require('TT.Model.MockDataCreator'),
-        _appEvents        = require('Nori.Events.AppEventCreator'),
+        _appEvents        = require('Nori.Events.NoriEventCreator'),
         _dispatcher       = require('Nori.Utils.Dispatcher'),
         _ttEventConstants = require('TT.Events.TTEventConstants'),
         _sharePoint       = require('Nudoru.Services.SharePointConnect');
