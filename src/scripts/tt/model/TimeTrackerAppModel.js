@@ -1,4 +1,4 @@
-define('TT.Model.TimeTrackerAppModel',
+define('tt/model/TimeTrackerAppModel',
   function (require, module, exports) {
 
     var _this,
@@ -9,12 +9,11 @@ define('TT.Model.TimeTrackerAppModel',
         _projectsCollection,
         _assignmentsCollection,
         _currentUserMap,
-        _timeModel        = require('TT.Model.TimeModel'),
-        _dataCreator      = require('TT.Model.MockDataCreator'),
-        _appEvents        = require('Nori.Events.NoriEventCreator'),
-        _dispatcher       = require('Nori.Utils.Dispatcher'),
-        _ttEventConstants = require('TT.Events.TTEventConstants'),
-        _sharePoint       = require('Nudoru.Services.SharePointConnect');
+        _timeModel        = require('tt/model/TimeModel'),
+        _dataCreator      = require('tt/model/MockDataCreator'),
+        _appEvents        = require('nori/events/EventCreator'),
+        _dispatcher       = require('nori/utils/Dispatcher'),
+        _ttEventConstants = require('tt/events/EventConstants');
 
     //----------------------------------------------------------------------------
     //  Accessors

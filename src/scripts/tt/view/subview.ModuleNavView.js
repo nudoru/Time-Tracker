@@ -2,14 +2,14 @@
  * Manages left side module navigation
  */
 
-define('TT.View.ModuleNavView',
+define('tt/view/ModuleNavView',
   function (require, module, exports) {
 
     var _buttonMap         = Object.create(null),
-        _browserInfo       = require('Nudoru.Browser.BrowserInfo'),
-        _appEventConstants = require('Nori.Events.NoriEventConstants'),
-        _domUtils          = require('Nudoru.Browser.DOMUtils'),
-        _dispatcher        = require('Nori.Utils.Dispatcher');
+        _browserInfo       = require('nudoru/browser/BrowserInfo'),
+        _appEventConstants = require('nori/events/EventConstants'),
+        _domUtils          = require('nudoru/browser/DOMUtils'),
+        _dispatcher        = require('nori/utils/Dispatcher');
 
     function initialize() {
       mapButton('btn_assignments', '/Assignments');

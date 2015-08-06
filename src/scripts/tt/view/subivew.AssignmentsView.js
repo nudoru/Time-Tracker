@@ -1,4 +1,4 @@
-define('TT.View.AssignmentsView',
+define('tt/view/AssignmentsView',
   function (require, module, exports) {
 
     var _this,
@@ -8,8 +8,8 @@ define('TT.View.AssignmentsView',
         _dateFields    = [],
         _removeButtons = [],
         _datePickers   = [],
-        _domUtils      = require('Nudoru.Browser.DOMUtils'),
-        _ttEvents      = require('TT.Events.TTEventCreator');
+        _domUtils      = require('nudoru/browser/DOMUtils'),
+        _ttEvents      = require('tt/events/EventCreator');
 
     function initialize(initObj) {
       _this = this;

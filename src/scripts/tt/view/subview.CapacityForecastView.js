@@ -1,4 +1,4 @@
-define('TT.View.CapacityForecastView',
+define('tt/view/CapacityForecastView',
   function (require, module, exports) {
 
     function initialize(initObj) {

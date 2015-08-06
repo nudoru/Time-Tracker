@@ -1,4 +1,4 @@
-define('TT.View.UserProfilePanelView',
+define('tt/view/UserProfilePanelView',
   function (require, module, exports) {
 
     var _currentUserModel;

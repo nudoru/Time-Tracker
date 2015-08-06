@@ -2,8 +2,8 @@ define('TT.TimeTrackerApplication',
   function (require, module, exports) {
 
     var _this,
-        _appEventConstants = require('Nori.Events.NoriEventConstants'),
-        _dispatcher        = require('Nori.Utils.Dispatcher');
+        _appEventConstants = require('nori/events/EventConstants'),
+        _dispatcher        = require('nori/utils/Dispatcher');
 
     function initialize() {
       _this = this;
@@ -11,8 +11,8 @@ define('TT.TimeTrackerApplication',
       _dispatcher.subscribe(_appEventConstants.APP_MODEL_INITIALIZED, onModelInitialized.bind(this), true);
 
       this.initializeApplication({
-        model: this.createApplicationModel(require('TT.Model.TimeTrackerAppModel')),
-        view : this.createApplicationView(require('TT.View.TimeTrackerAppView'))
+        model: this.createApplicationModel(require('tt/model/TimeTrackerAppModel')),
+        view : this.createApplicationView(require('tt/view/TimeTrackerAppView'))
       });
 
       this.view().initialize();

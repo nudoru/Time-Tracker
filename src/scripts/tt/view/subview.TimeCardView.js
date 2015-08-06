@@ -1,4 +1,4 @@
-define('TT.View.TimeCardView',
+define('tt/view/TimeCardView',
   function (require, module, exports) {
 
     var _this,
@@ -11,11 +11,11 @@ define('TT.View.TimeCardView',
         _isLocked          = false,
         _lockedStatusEl,
         _inProgressStatusEl,
-        _domUtils          = require('Nudoru.Browser.DOMUtils'),
-        _ttEvents          = require('TT.Events.TTEventCreator'),
-        _arrayUtils        = require('Nudoru.Core.ArrayUtils'),
-        _appEventConstants = require('Nori.Events.NoriEventConstants'),
-        _dispatcher        = require('Nori.Utils.Dispatcher');
+        _domUtils          = require('nudoru/browser/DOMUtils'),
+        _ttEvents          = require('tt/events/EventCreator'),
+        _arrayUtils        = require('nudoru/core/ArrayUtils'),
+        _appEventConstants = require('nori/events/EventConstants'),
+        _dispatcher        = require('nori/utils/Dispatcher');
     _successMessages       = ['Thanks for all you do!',
       '"What ever you\'re goal is in life, embrace it visualize it, and for it will be yours."',
       'Success is 1% inspiration, 98% perspiration and 2% attention to detail.',

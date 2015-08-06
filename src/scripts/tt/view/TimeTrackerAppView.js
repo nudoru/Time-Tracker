@@ -4,15 +4,15 @@
  * this._super refers to Nori.View
  */
 
-define('TT.View.TimeTrackerAppView',
+define('tt/view/TimeTrackerAppView',
   function (require, module, exports) {
 
     var _this,
-        _helpView              = require('Nudoru.Component.CoachMarksView'),
-        _moduleNavView         = require('TT.View.ModuleNavView'),
-        _appEvents             = require('Nori.Events.NoriEventCreator'),
-        _dispatcher            = require('Nori.Utils.Dispatcher'),
-        _appEventConstants     = require('Nori.Events.NoriEventConstants');
+        _helpView              = require('nudoru/component/CoachMarksView'),
+        _moduleNavView         = require('tt/view/ModuleNavView'),
+        _appEvents             = require('nori/events/EventCreator'),
+        _dispatcher            = require('nori/utils/Dispatcher'),
+        _appEventConstants     = require('nori/events/EventConstants');
 
     function initialize() {
       _this = this;
@@ -21,7 +21,7 @@ define('TT.View.TimeTrackerAppView',
 
       mapRoutes();
 
-      _this.createComponent('UserProfilePanel', 'TT.View.UserProfilePanelView', '#userprofilepanel');
+      _this.createComponent('UserProfilePanel', 'tt/view/UserProfilePanelView', '#userprofilepanel');
 
       configureUIEvents();
       configureHelpCoachmarks();
@@ -38,13 +38,13 @@ define('TT.View.TimeTrackerAppView',
      * Set up the view to routes
      */
     function mapRoutes() {
-      TT.mapRouteView('/', 'Timecard', requireNew('TT.View.TimeCardView'));
-      TT.mapRouteView('/Assignments', 'Assignments', requireNew('TT.View.AssignmentsView'));
-      TT.mapRouteView('/Forecast', 'Forecast', requireNew('TT.View.CapacityForecastView'));
+      TT.mapRouteView('/', 'Timecard', requireNew('tt/view/TimeCardView'));
+      TT.mapRouteView('/Assignments', 'Assignments', requireNew('tt/view/AssignmentsView'));
+      TT.mapRouteView('/Forecast', 'Forecast', requireNew('tt/view/CapacityForecastView'));
 
       // Decorate the base subview modules with additional common functionality
       ['Assignments','Timecard','Forecast'].forEach(function decorate(moduleID) {
-        _this.applyMixin(moduleID, [requireNew('TT.View.ModuleCommon')]);
+        _this.applyMixin(moduleID, [requireNew('tt/view/ModuleCommon')]);
       });
     }
 

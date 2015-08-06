@@ -6,12 +6,12 @@
 
  Refer - http://ejohn.org/blog/javascript-micro-templating/
  */
-define('Nori.Utils.Templating',
+define('nori/utils/Templating',
   function (require, module, exports) {
 
     var _templateHTMLCache = Object.create(null),
         _templateCache     = Object.create(null),
-        _DOMUtils          = require('Nudoru.Browser.DOMUtils');
+        _DOMUtils          = require('nudoru/browser/DOMUtils');
 
     /**
      * Get the template html from the script tag with id
@@ -29,7 +29,7 @@ define('Nori.Utils.Templating',
       if (src) {
         srchtml = src.innerHTML;
       } else {
-        throw new Error('Nudoru.Core.NTemplate, template not found: "' + id + '"');
+        throw new Error('nudoru/core/NTemplate, template not found: "' + id + '"');
       }
 
       cleanhtml              = cleanTemplateHTML(srchtml);

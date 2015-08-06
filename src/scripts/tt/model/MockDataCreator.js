@@ -1,4 +1,4 @@
-define('TT.Model.MockDataCreator',
+define('tt/model/MockDataCreator',
 
   function (require, module, exports) {
     "use strict";
@@ -20,10 +20,10 @@ define('TT.Model.MockDataCreator',
         _possibleTasks        = ['Analysis', 'Design', 'Develop', 'Implement', 'Evaluate', 'Consult'],
         _possibleLobs         = ['Information Technology', 'Asset Management', 'Human Resources', 'Institutional', 'A&O', 'Client Services', 'Finance', 'Internal Audit', 'Marketing', 'Risk Management'],
         _possibleProjectTypes = ['pmo', 'category'],
-        _lorem                = require('Nudoru.Browser.NLorem'),
-        _arrayUtils           = require('Nudoru.Core.ArrayUtils'),
-        _stringUtils          = require('Nudoru.Core.StringUtils'),
-        _numberUtils          = require('Nudoru.Core.NumberUtils');
+        _lorem                = require('nudoru/browser/NLorem'),
+        _arrayUtils           = require('nudoru/core/ArrayUtils'),
+        _stringUtils          = require('nudoru/core/StringUtils'),
+        _numberUtils          = require('nudoru/core/NumberUtils');
 
     function getPeople() {
       return _people;

@@ -3,14 +3,15 @@
  */
 
 
-define('Nori.Model.MapCollection',
+define('nori/model/MapCollection',
   function (require, module, exports) {
 
     var _this,
         _id,
+        _parentCollection,
         _children  = [],
         _silent    = false,
-        _appEvents = require('Nori.Events.NoriEventCreator');
+        _appEvents = require('nori/events/EventCreator');
 
     //----------------------------------------------------------------------------
     //  Initialization
@@ -29,6 +30,22 @@ define('Nori.Model.MapCollection',
       if (initObj.models) {
         addMapsFromArray.call(_this, initObj.models);
       }
+    }
+
+    function isDirty() {
+      var dirty = false;
+      forEach(function checkDirty(map) {
+        if (map.isDirty()) {
+          dirty = true;
+        }
+      });
+      return dirty;
+    }
+
+    function markClean() {
+      forEach(function checkDirty(map) {
+        map.markClean();
+      });
     }
 
     /**
@@ -167,10 +184,9 @@ define('Nori.Model.MapCollection',
         });
       }
 
-      // TODO Implement collections of collections
-      //if(_parentCollection) {
-      //  _parentCollection.dispatchChange({id:_id, store:getMap()});
-      //}
+      if(_parentCollection) {
+        _parentCollection.dispatchChange({id:_id, store:getMap()});
+      }
     }
 
     function hasMap(storeID) {
@@ -256,6 +272,8 @@ define('Nori.Model.MapCollection',
 
     module.exports.initialize          = initialize;
     module.exports.getID               = getID;
+    module.exports.isDirty             = isDirty;
+    module.exports.markClean           = markClean;
     module.exports.add                 = add;
     module.exports.addMapsFromArray    = addMapsFromArray;
     module.exports.addFromObjArray     = addFromObjArray;

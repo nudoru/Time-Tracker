@@ -4,12 +4,12 @@ var Nori = (function () {
       _view,
       //_dispatcherCommandMap = Object.create(null),
       _modelViewBindingMap  = Object.create(null),
-      _appEvents            = require('Nori.Events.NoriEventCreator'),
-      _appEventConstants    = require('Nori.Events.NoriEventConstants'),
-      _browserEvents        = require('Nudoru.Browser.BrowserEventConstants'),
-      _objectUtils          = require('Nudoru.Core.ObjectUtils'),
-      _dispatcher           = require('Nori.Utils.Dispatcher'),
-      _router               = require('Nori.Utils.Router');
+      _appEvents            = require('nori/events/EventCreator'),
+      _appEventConstants    = require('nori/events/EventConstants'),
+      _browserEvents        = require('nudoru/browser/EventConstants'),
+      _objectUtils          = require('nudoru/core/ObjectUtils'),
+      _dispatcher           = require('nori/utils/Dispatcher'),
+      _router               = require('nori/utils/Router');
 
   //----------------------------------------------------------------------------
   //  Accessors
@@ -104,6 +104,10 @@ var Nori = (function () {
 
   // http://mithril.js.org/mithril.prop.html
   function prop(store) {
+    if(isFunction(store.then)) {
+
+    }
+
     var gettersetter = function () {
       if (arguments.length) {
         store = arguments[0];
@@ -336,7 +340,7 @@ var Nori = (function () {
    */
   function createApplicationModel(extras) {
     return extendWithArray({}, [
-      require('Nori.Model.ApplicationModel'),
+      require('nori/model/ApplicationModel'),
       extras
     ]);
   }
@@ -348,9 +352,9 @@ var Nori = (function () {
    */
   function createApplicationView(extras) {
     return extendWithArray({}, [
-      require('Nori.View.ApplicationView'),
-      require('Nori.View.ViewMixinSubViewRoutes'),
-      requireNew('Nori.View.ViewMixinEventDelegator'),
+      require('nori/view/ApplicationView'),
+      require('nori/view/MixinSubViewRoutes'),
+      requireNew('nori/view/MixinEventDelegator'),
       extras
     ]);
   }

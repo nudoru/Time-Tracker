@@ -3,13 +3,13 @@
  * Capacity Forecast share
  */
 
-define('TT.View.ModuleCommon',
+define('tt/view/ModuleCommon',
   function (require, module, exports) {
 
     var _messageBoxIDs  = [],
         _assignmentRows = [],
-        _domUtils       = require('Nudoru.Browser.DOMUtils'),
-        _toolTip        = require('Nudoru.Component.ToolTipView');
+        _domUtils       = require('nudoru/browser/DOMUtils'),
+        _toolTip        = require('nudoru/component/ToolTipView');
 
     function initializeCommon() {
       // nothing

@@ -1,8 +1,8 @@
-define('TT.Events.TTEventCreator',
+define('tt/events/EventCreator',
   function (require, module, exports) {
 
-    var _dispatcher            = require('Nori.Utils.Dispatcher'),
-        _ttEventConstants     = require('TT.Events.TTEventConstants');
+    var _dispatcher            = require('nori/utils/Dispatcher'),
+        _ttEventConstants     = require('tt/events/EventConstants');
 
     module.exports.addAssignment = function(projectID) {
       _dispatcher.publish({

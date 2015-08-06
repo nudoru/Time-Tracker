@@ -1,6 +1,6 @@
-define('TT.Events.TTEventConstants',
+define('tt/events/EventConstants',
   function (require, module, exports) {
-    var objUtils = require('Nudoru.Core.ObjectUtils');
+    var objUtils = require('nudoru/core/ObjectUtils');
 
     _.merge(exports, objUtils.keyMirror({
       ADD_ASSIGNMENT       : null,
