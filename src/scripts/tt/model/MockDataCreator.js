@@ -1,7 +1,6 @@
 define('tt/model/MockDataCreator',
 
   function (require, module, exports) {
-    "use strict";
 
     var _projectId            = 100,
         _assignmentId         = 1000,
@@ -60,10 +59,6 @@ define('tt/model/MockDataCreator',
       for (var k = 0; k < numAssignments; k++) {
         _assignments.push(createAssignment(_arrayUtils.rndElement(_people), _arrayUtils.rndElement(_projects)));
       }
-
-      //for (var k = 0; k < numAssignments; k++) {
-      //  _assignments.push(createAssignment(_people[0], _projects[k]));
-      //}
 
       localStorage['mockTTData.people']      = JSON.stringify(_people);
       localStorage['mockTTData.projects']    = JSON.stringify(_projects);
