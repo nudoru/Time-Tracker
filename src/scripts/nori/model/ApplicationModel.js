@@ -2,10 +2,9 @@ define('nori/model/ApplicationModel',
   function (require, module, exports) {
 
     var _this,
-      _appMapCollectionList = Object.create(null),
-      _appMapList = Object.create(null),
-      _appEventConstants = require('nori/events/EventConstants'),
-      _dispatcher = require('nori/utils/Dispatcher');
+        _appMapCollectionList = Object.create(null),
+        _appMapList = Object.create(null),
+        _appEventConstants = require('nori/events/EventConstants');
 
     function initializeApplicationModel() {
       _this = this;
@@ -16,10 +15,10 @@ define('nori/model/ApplicationModel',
         throw new Error('nori/model/ApplicationModel, cannot subscribeToModelEvents() without initializeApplicationModel() first');
       }
 
-      _dispatcher.subscribe(_appEventConstants.MODEL_DATA_CHANGED, function execute(payload) {
+      Nori.dispatcher().subscribe(_appEventConstants.MODEL_DATA_CHANGED, function execute(payload) {
         _this.handleModelDataChanged(payload);
       });
-      _dispatcher.subscribe(_appEventConstants.UPDATE_MODEL_DATA, function execute(payload) {
+      Nori.dispatcher().subscribe(_appEventConstants.UPDATE_MODEL_DATA, function execute(payload) {
         _this.handleUpdateModelData(payload);
       });
     }
