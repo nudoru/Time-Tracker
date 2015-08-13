@@ -3,7 +3,7 @@ define('tt/view/CapacityForecastView',
 
     function initialize(initObj) {
       if(!this.isInitialized()) {
-        this.initializeSubView(initObj);
+        this.initializeComponent(initObj);
       }
     }
 

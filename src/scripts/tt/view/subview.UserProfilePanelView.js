@@ -6,7 +6,7 @@ define('tt/view/UserProfilePanelView',
     function initialize(initObj) {
       if (!this.isInitialized()) {
         _currentUserModel = TT.model().getCurrentUserModel();
-        this.initializeSubView(initObj);
+        this.initializeComponent(initObj);
       }
     }
 

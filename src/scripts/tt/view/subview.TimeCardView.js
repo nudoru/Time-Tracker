@@ -36,7 +36,7 @@ define('tt/view/TimeCardView',
     function initialize(initObj) {
       _this = this;
       if (!this.isInitialized()) {
-        this.initializeSubView(initObj);
+        this.initializeComponent(initObj);
         this.setEvents({
           'change #tc_p_table'  : handleInputChangeEvent,
           'click #tc_btn-submit': handleTimeCardSubmitClick,

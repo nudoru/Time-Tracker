@@ -21,7 +21,7 @@ define('tt/view/TimeTrackerAppView',
 
       mapRoutes();
 
-      _this.createComponent('UserProfilePanel', 'tt/view/UserProfilePanelView', '#userprofilepanel');
+      _this.mapViewComponent('UserProfilePanel', 'tt/view/UserProfilePanelView', false, '#userprofilepanel');
 
       configureUIEvents();
       configureHelpCoachmarks();
@@ -38,9 +38,9 @@ define('tt/view/TimeTrackerAppView',
      * Set up the view to routes
      */
     function mapRoutes() {
-      TT.mapRouteView('/', 'Timecard', requireNew('tt/view/TimeCardView'));
-      TT.mapRouteView('/Assignments', 'Assignments', requireNew('tt/view/AssignmentsView'));
-      TT.mapRouteView('/Forecast', 'Forecast', requireNew('tt/view/CapacityForecastView'));
+      TT.mapRouteToViewComponent('/', 'Timecard', requireNew('tt/view/TimeCardView'));
+      TT.mapRouteToViewComponent('/Assignments', 'Assignments', requireNew('tt/view/AssignmentsView'));
+      TT.mapRouteToViewComponent('/Forecast', 'Forecast', requireNew('tt/view/CapacityForecastView'));
 
       // Decorate the base subview modules with additional common functionality
       ['Assignments','Timecard','Forecast'].forEach(function decorate(moduleID) {
@@ -49,7 +49,7 @@ define('tt/view/TimeTrackerAppView',
     }
 
     function render() {
-      _this.renderComponent('UserProfilePanel');
+      _this.showViewComponent('UserProfilePanel');
     }
 
     function configureUIEvents() {
