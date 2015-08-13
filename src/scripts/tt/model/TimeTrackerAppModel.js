@@ -46,8 +46,6 @@ define('tt/model/TimeTrackerAppModel',
 
     function initialize() {
       _this = this;
-      this.initializeApplicationModel();
-      this.subscribeToModelEvents();
 
       _timeModel.initialize();
 
