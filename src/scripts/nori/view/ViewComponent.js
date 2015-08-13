@@ -98,7 +98,7 @@ define('nori/view/ViewComponent',
      * @returns {boolean}
      */
     function viewShouldRender(previousState) {
-      return this.getState() === previousState;
+      return true;
     }
 
     /**

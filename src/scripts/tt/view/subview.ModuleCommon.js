@@ -49,7 +49,6 @@ define('tt/view/ModuleCommon',
 
       // calendar is the common MomentJS instance
       obj.calendar = TT.model().getTimeModelObj();
-
       this.setState(obj);
     }
 
