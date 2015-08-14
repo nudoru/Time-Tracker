@@ -202,7 +202,7 @@ module.exports = function (grunt) {
     connect: {
       server: {
         options: {
-          port: 9002,
+          port: 9001,
           base: 'bin'
         }
       }
@@ -210,7 +210,7 @@ module.exports = function (grunt) {
 
     watch: {
       options: {
-        livereload: 1337
+        livereload: true
       },
 
       html: {

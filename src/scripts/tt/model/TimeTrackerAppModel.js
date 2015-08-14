@@ -23,6 +23,14 @@ define('tt/model/TimeTrackerAppModel',
       return _currentUserMap;
     }
 
+    function getAssignmentsModel() {
+      return _assignmentsCollection;
+    }
+
+    function getTimeModel() {
+      return _timeModel;
+    }
+
     function getTimeModelObj() {
       return {
         currentWeek: _timeModel.getCurrentWeek(),
@@ -433,6 +441,8 @@ define('tt/model/TimeTrackerAppModel',
 
     module.exports.initialize                       = initialize;
     module.exports.getCurrentUserModel              = getCurrentUserModel;
+    module.exports.getAssignmentsModel              = getAssignmentsModel;
+    module.exports.getTimeModel                     = getTimeModel;
     module.exports.getTimeModelObj                  = getTimeModelObj;
     module.exports.getNow                           = getNow;
     module.exports.handleModelDataChanged           = handleModelDataChanged;

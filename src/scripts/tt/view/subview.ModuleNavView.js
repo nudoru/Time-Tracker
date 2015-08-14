@@ -5,22 +5,24 @@
 define('tt/view/ModuleNavView',
   function (require, module, exports) {
 
-    var _buttonMap         = Object.create(null),
+    var _this,
+        _buttonMap         = Object.create(null),
         _browserInfo       = require('nudoru/browser/BrowserInfo'),
         _appEventConstants = require('nori/events/EventConstants'),
         _domUtils          = require('nudoru/browser/DOMUtils'),
         _dispatcher        = require('nori/utils/Dispatcher');
 
     function initialize() {
+      _this = this;
+
       mapButton('btn_assignments', '/Assignments');
       mapButton('btn_timecard', '/');
       mapButton('btn_forecast', '/Forecast');
 
       // Highlight the correct module when a route change occurs
-      _dispatcher.subscribe(_appEventConstants.ROUTE_CHANGED,
-        function onRouteChange(payload) {
-          this.highlightModule(payload.payload.route);
-        }, this);
+      Nori.router().subscribe(function onRouteChange(payload) {
+        _this.highlightModule(payload.routeObj.route);
+      });
     }
 
     /**
