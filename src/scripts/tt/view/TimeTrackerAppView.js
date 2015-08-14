@@ -38,9 +38,9 @@ define('tt/view/TimeTrackerAppView',
      * Set up the view to routes
      */
     function mapRoutes() {
-      TT.mapRouteToViewComponent('/', 'Timecard', requireNew('tt/view/TimeCardView'));
-      TT.mapRouteToViewComponent('/Assignments', 'Assignments', requireNew('tt/view/AssignmentsView'));
-      TT.mapRouteToViewComponent('/Forecast', 'Forecast', requireNew('tt/view/CapacityForecastView'));
+      _this.mapRouteToViewComponent('/', 'Timecard', requireNew('tt/view/TimeCardView'));
+      _this.mapRouteToViewComponent('/Assignments', 'Assignments', requireNew('tt/view/AssignmentsView'));
+      _this.mapRouteToViewComponent('/Forecast', 'Forecast', requireNew('tt/view/CapacityForecastView'));
 
       // Decorate the base subview modules with additional common functionality
       ['Assignments','Timecard','Forecast'].forEach(function decorate(moduleID) {

@@ -25,7 +25,7 @@ define('TT.TimeTrackerApplication',
     function onModelInitialized() {
       this.view().removeLoadingMessage();
       this.view().render();
-      this.setCurrentRoute(TT.router().getCurrentRoute());
+      this.view().showViewFromURLHash();
     }
 
     //----------------------------------------------------------------------------

@@ -3,7 +3,7 @@
  * Returns a promise for a request
  */
 
-define('nori/service/Rest',
+define('nori/service/rest',
   function (require, module, exports) {
 
     /**

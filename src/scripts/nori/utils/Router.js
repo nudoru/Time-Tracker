@@ -1,50 +1,52 @@
 /**
  * Simple router
  * Supporting IE9 so using hashes instead of the history API for now
- *
- * Basic usage:
- * _router.when('/',{templateID:'test', controller:function(obj) {
-      console.log('Running route: '+obj.route+', with template: '+obj.templateID);
-    }});
- *
- * Check this out for using a regex match
- * http://krasimirtsonev.com/blog/article/A-modern-JavaScript-router-in-100-lines-history-api-pushState-hash-url
- *
  */
 
 define('nori/utils/Router',
   function (require, module, exports) {
 
-    var _routeMap  = Object.create(null),
-        _objUtils = require('nudoru/core/ObjectUtils'),
-        _noriEvents = require('nori/events/EventCreator');
+    var _routeMap           = Object.create(null),
+        _subject            = new Rx.Subject(),
+        _objUtils           = require('nudoru/core/ObjectUtils'),
+        _noriEventConstants = require('nori/events/EventConstants');
 
+    /**
+     * Set event handlers
+     */
     function initialize() {
-      window.addEventListener('hashchange', onHashChange, false);
+      window.addEventListener('hashchange', notifySubscribers, false);
+      Nori.dispatcher().subscribe(_noriEventConstants.CHANGE_ROUTE, handleAppRouteChangeRequests);
     }
 
     /**
-     * Map a route to a given controller function
-     * The controller funtion will be passed an object with the route and templateID
-     * @param route
-     * @param conObj
+     * Handle application route change requests
+     * @param payload
      */
-    function when(route, conObj) {
-      _routeMap[route] = {
-        templateID: conObj.templateID,
-        controller: conObj.controller
-      };
+    function handleAppRouteChangeRequests(payload) {
+      set(payload.payload.route, payload.payload.data);
     }
 
     /**
-     * Broadcast the change event and let the application determine how to handle
-     * @param evt
+     * subscribe a handler to the url change events
+     * @param handler
+     * @returns {*}
      */
-    function onHashChange(evt) {
-      _noriEvents.urlHashChanged({
-        routeObj: getCurrentRoute(),
+    function subscribe(handler) {
+      return _subject.subscribe(handler);
+    }
+
+    /**
+     * Notify of a change in route
+     * @param fromApp True if the route was caused by an app event not URL or history change
+     */
+    function notifySubscribers() {
+      var eventPayload = {
+        routeObj: getCurrentRoute(), // { route:, data: }
         fragment: getURLFragment()
-      });
+      };
+
+      _subject.onNext(eventPayload);
     }
 
     /**
@@ -58,21 +60,11 @@ define('nori/utils/Router',
           queryStr    = decodeURIComponent(parts[1]),
           queryStrObj = parseQueryStr(queryStr);
 
-      if(queryStr==='=undefined') {
-        queryStr = '';
+      if (queryStr === '=undefined') {
         queryStrObj = {};
       }
 
       return {route: route, data: queryStrObj};
-    }
-
-    /**
-     * Runs the route currently on the URL
-     * Primarily used window.load
-     */
-    function runCurrentRoute() {
-      var current = getCurrentRoute();
-      runRoute(current.route, current.data);
     }
 
     /**
@@ -93,30 +85,11 @@ define('nori/utils/Router',
     }
 
     /**
-     * Executes the controller function for the given route
-     * @param route
-     * @param queryStrObj
-     */
-    function runRoute(route, queryStrObj) {
-      var routeObj = _routeMap[route];
-
-      if (routeObj) {
-        routeObj.controller.call(window, {
-          route     : route,
-          templateID: routeObj.templateID,
-          queryData : queryStrObj
-        });
-      } else {
-        console.log('No Route mapped for: "' + route + '"');
-      }
-    }
-
-    /**
      * Combines a route and data object into a proper URL hash fragment
      * @param route
      * @param dataObj
      */
-    function setRoute(route, dataObj) {
+    function set(route, dataObj) {
       var path = route,
           data = [];
       if (!_objUtils.isNull(dataObj)) {
@@ -128,8 +101,6 @@ define('nori/utils/Router',
         }
         path += data.join('&');
       }
-
-      console.log('Router, setting URL fragment to: ',path);
 
       updateURLFragment(path);
     }
@@ -154,10 +125,10 @@ define('nori/utils/Router',
       window.location.hash = path;
     }
 
-    module.exports.initialize      = initialize;
-    module.exports.when            = when;
-    module.exports.getCurrentRoute = getCurrentRoute;
-    module.exports.runCurrentRoute = runCurrentRoute;
-    module.exports.setRoute        = setRoute;
+    module.exports.initialize        = initialize;
+    module.exports.subscribe         = subscribe;
+    module.exports.notifySubscribers = notifySubscribers;
+    module.exports.getCurrentRoute   = getCurrentRoute;
+    module.exports.set               = set;
 
   });
