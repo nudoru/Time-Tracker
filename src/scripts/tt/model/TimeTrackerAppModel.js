@@ -165,7 +165,7 @@ define('tt/model/TimeTrackerAppModel',
      */
     function getCurrentUserMap() {
       // Mock - just pull the first user
-      return _peopleCollection.getFirst();
+      return _peopleCollection.first();
     }
 
     //----------------------------------------------------------------------------

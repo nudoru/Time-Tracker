@@ -1,8 +1,9 @@
 var Nori = (function () {
   var _model,
       _view,
-      _dispatcher = require('nori/utils/Dispatcher'),
-      _router     = require('nori/utils/Router');
+      _objectUtils = require('nudoru/core/ObjectUtils'),
+      _dispatcher  = require('nori/utils/Dispatcher'),
+      _router      = require('nori/utils/Router');
 
   //----------------------------------------------------------------------------
   //  Accessors
@@ -25,7 +26,7 @@ var Nori = (function () {
   }
 
   function getConfig() {
-    return _.assign({}, (window.APP_CONFIG_DATA || {}));
+    return _objectUtils.extend({}, (window.APP_CONFIG_DATA || {}));
   }
 
   function getCurrentRoute() {
@@ -51,16 +52,26 @@ var Nori = (function () {
   //----------------------------------------------------------------------------
 
   /**
-   * Merges a collection of objects
-   * @param target
-   * @param sourceArray
+   * Merges objects
+   * @param base Destination object
+   * @param extra Source
    * @returns {*}
    */
-  function assignArray(target, sourceArray) {
-    sourceArray.forEach(function (source) {
-      target = _.assign(target, source);
-    });
-    return target;
+  function extend(base, extra) {
+    return _.assign({}, base, extra);
+  }
+
+  /**
+   * Merges a collection of objects
+   * @param base
+   * @param extArry
+   * @returns {*}
+   */
+  function extendWithArray(base, extArry) {
+    while (extArry.length) {
+      base = _.assign(base, extArry.shift());
+    }
+    return base;
   }
 
   /**
@@ -69,7 +80,7 @@ var Nori = (function () {
    * @returns {*}
    */
   function createApplication(extras) {
-    return assignArray({}, [
+    return extendWithArray({}, [
       this,
       extras
     ]);
@@ -81,7 +92,7 @@ var Nori = (function () {
    * @returns {*}
    */
   function createApplicationModel(extras) {
-    return assignArray({}, [
+    return extendWithArray({}, [
       require('nori/model/MixinMapFactory'),
       require('nori/model/MixinReducerModel'),
       extras
@@ -94,7 +105,7 @@ var Nori = (function () {
    * @returns {*}
    */
   function createApplicationView(extras) {
-    return assignArray({}, [
+    return extendWithArray({}, [
       require('nori/view/ApplicationView'),
       require('nori/view/MixinNudoruControls'),
       require('nori/view/MixinComponentViews'),
@@ -154,7 +165,8 @@ var Nori = (function () {
     createApplicationModel: createApplicationModel,
     createApplicationView : createApplicationView,
     getCurrentRoute       : getCurrentRoute,
-    assignArray           : assignArray,
+    extend                : extend,
+    extendWithArray       : extendWithArray,
     prop                  : prop,
     withAttr              : withAttr
   };
