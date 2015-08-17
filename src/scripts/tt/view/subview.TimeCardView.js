@@ -44,7 +44,8 @@ define('tt/view/TimeCardView',
           'click #tc_btn-prevwk': handlePreviousWeekClick,
           'click #tc_btn-nextwk': handleNextWeekClick
         });
-        TT.model().getTimeModel().subscribe(this.update.bind(this));
+        //TT.model().getTimeModel().subscribe(this.update.bind(this));
+        this.bindMap(TT.model().getTimeModel());
       }
     }
 

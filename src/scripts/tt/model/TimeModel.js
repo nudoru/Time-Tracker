@@ -1,23 +1,14 @@
 define('tt/model/TimeModel',
 
   function (require, module, exports) {
-    var _moment,
-        _id,
-        _subject = new Rx.Subject(),
-        _appEvents = require('nori/events/EventCreator');
+    var _this,
+        _moment,
+        _id;
 
     function initialize() {
+      _this   = this;
       _moment = moment();
       _id     = 'timeModel';
-    }
-
-    /**
-     * subscribe a handler for changes
-     * @param handler
-     * @returns {*}
-     */
-    function subscribe(handler) {
-      return _subject.subscribe(handler);
     }
 
     function now() {
@@ -78,12 +69,10 @@ define('tt/model/TimeModel',
         mapID  : ''
       };
 
-      _subject.onNext(payload);
-      _appEvents.modelChanged(payload);
+      _this.notifySubscribers(payload);
     }
 
     module.exports.initialize          = initialize;
-    module.exports.subscribe           = subscribe;
     module.exports.now                 = now;
     module.exports.prettyNow           = prettyNow;
     module.exports.getTimeStamp        = getTimeStamp;

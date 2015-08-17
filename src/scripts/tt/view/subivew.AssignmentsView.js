@@ -19,7 +19,7 @@ define('tt/view/AssignmentsView',
           'change #asn_p_table'  : handleInputChangeEvent,
           'click #asn_btn-addnew': handleAddNewClick
         });
-        TT.model().getAssignmentsModel().subscribe(this.update.bind(this));
+        this.bindMap(TT.model().getAssignmentsModel());
       }
     }
 

@@ -9,8 +9,8 @@ define('nori/model/MapCollection',
     var _this,
         _id,
         _parentCollection,
-        _children = [],
-        _subject  = new Rx.Subject();
+        _caret    = 0,
+        _children = [];
 
     //----------------------------------------------------------------------------
     //  Initialization
@@ -30,14 +30,37 @@ define('nori/model/MapCollection',
       }
     }
 
-    /**
-     * subscribe a handler for changes
-     * @param handler
-     * @returns {*}
-     */
-    function subscribe(handler) {
-      return _subject.subscribe(handler);
+    //----------------------------------------------------------------------------
+    //  Iterator
+    //----------------------------------------------------------------------------
+
+    function next() {
+      var ret = {};
+      if (hasNext()) {
+        ret = {value: _children[_caret++], done: !hasNext()};
+      } else {
+        ret = current();
+      }
+
+      return ret;
     }
+
+    function current() {
+      return {value: _children[_caret], done: !hasNext()}
+    }
+
+    function rewind() {
+      _caret = 0;
+      return _children[_caret];
+    }
+
+    function hasNext() {
+      return _caret < _children.length;
+    }
+
+    //----------------------------------------------------------------------------
+    //  Impl
+    //----------------------------------------------------------------------------
 
     function isDirty() {
       var dirty = false;
@@ -85,7 +108,6 @@ define('nori/model/MapCollection',
       });
       dispatchChange(_id, 'add_map');
     }
-
 
     function addFromJSONArray(json, idKey) {
       json.forEach(function (jstr) {
@@ -188,7 +210,7 @@ define('nori/model/MapCollection',
         mapID  : data.id
       };
 
-      _subject.onNext(payload);
+      _this.notifySubscribers(payload);
 
       if (_parentCollection) {
         _parentCollection.dispatchChange({id: _id, store: getMap()});
@@ -277,7 +299,10 @@ define('nori/model/MapCollection',
     //----------------------------------------------------------------------------
 
     module.exports.initialize          = initialize;
-    module.exports.subscribe           = subscribe;
+    module.exports.current             = current;
+    module.exports.next                = next;
+    module.exports.hasNext             = hasNext;
+    module.exports.rewind              = rewind;
     module.exports.getID               = getID;
     module.exports.isDirty             = isDirty;
     module.exports.markClean           = markClean;

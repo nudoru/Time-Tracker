@@ -9,7 +9,7 @@ define('tt/model/TimeTrackerAppModel',
         _projectsCollection,
         _assignmentsCollection,
         _currentUserMap,
-        _timeModel        = require('tt/model/TimeModel'),
+        _timeModel,
         _dataCreator      = require('tt/model/MockDataCreator'),
         _appEvents        = require('nori/events/EventCreator'),
         _dispatcher       = require('nori/utils/Dispatcher'),
@@ -55,6 +55,7 @@ define('tt/model/TimeTrackerAppModel',
     function initialize() {
       _this = this;
 
+      _timeModel = _.assign({},require('tt/model/TimeModel'), requireNew('nori/model/MixinObservableModel'));
       _timeModel.initialize();
 
       createDataCollections();
